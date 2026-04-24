@@ -1,0 +1,1173 @@
+[
+  {
+    "model": "authentication.user",
+    "pk": 1,
+    "fields": {
+      "email": "chef.john@example.com",
+      "first_name": "John",
+      "last_name": "Chef",
+      "phone_number": "+1234567890",
+      "profile_picture": "https://example.com/john-chef.jpg",
+      "address_longitude": -122.4194,
+      "address_latitude": 37.7749,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-01-15T10:00:00Z",
+      "updated_at": "2023-01-15T10:00:00Z",
+      "password": "pbkdf2_sha256$1000000$zgIYmQGflS5CO3rJbwulCC$pIWKpWUd8SdIMnqowLnGkW/5Yb/VgzcMkeUXsvuDKJg="
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 2,
+    "fields": {
+      "email": "chef.maria@example.com",
+      "first_name": "Maria",
+      "last_name": "Gonzalez",
+      "phone_number": "+1987654321",
+      "profile_picture": "https://example.com/maria-chef.jpg",
+      "address_longitude": -122.3301,
+      "address_latitude": 37.6879,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-02-20T14:30:00Z",
+      "updated_at": "2023-02-20T14:30:00Z",
+      "password": "pbkdf2_sha256$1000000$HMtCrQGZTSpdIBgwxd90v4$ixVVsGIrV8LaScofV8UAChMvTPrRL6U/BbiGWYMuhTU="
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 3,
+    "fields": {
+      "email": "consumer.sarah@example.com",
+      "first_name": "Sarah",
+      "last_name": "Johnson",
+      "phone_number": "+1555123456",
+      "profile_picture": "https://example.com/sarah-consumer.jpg",
+      "address_longitude": -122.2711,
+      "address_latitude": 37.8044,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-03-10T09:15:00Z",
+      "updated_at": "2023-03-10T09:15:00Z",
+      "password": "pbkdf2_sha256$1000000$wlVV4cI46SNzeG1vnsnZSA$rJ5+CqkTMDEFFaq8xv5dhBGs4g0xry841VedeWwuFC4="
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 4,
+    "fields": {
+      "email": "consumer.mike@example.com",
+      "first_name": "Mike",
+      "last_name": "Davis",
+      "phone_number": "+1555987654",
+      "profile_picture": "https://example.com/mike-consumer.jpg",
+      "address_longitude": -122.4473,
+      "address_latitude": 37.7622,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-04-05T16:45:00Z",
+      "updated_at": "2023-04-05T16:45:00Z",
+      "password": "pbkdf2_sha256$1000000$STRvhP7wb0hPibO9OYhhs5$m5fLCPkKJ05c0tyXecjNmacb5UQAxcjZwKfbQ2JqyXg="
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "rating": 4.8,
+      "total_reviews": 120,
+      "bio": "Experienced Italian chef with 10 years in the industry.",
+      "cuisine_specialties": "Italian, Mediterranean",
+      "years_of_experience": 10,
+      "is_verified": true,
+      "is_online": true,
+      "created_at": "2023-01-15T10:00:00Z",
+      "updated_at": "2023-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "rating": 4.6,
+      "total_reviews": 85,
+      "bio": "Award-winning Mexican chef specializing in authentic recipes.",
+      "cuisine_specialties": "Mexican, Tex-Mex",
+      "years_of_experience": 8,
+      "is_verified": true,
+      "is_online": true,
+      "created_at": "2023-02-20T14:30:00Z",
+      "updated_at": "2023-02-20T14:30:00Z"
+    }
+  },
+  {
+    "model": "authentication.consumer",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "total_orders": 25,
+      "created_at": "2023-03-10T09:15:00Z",
+      "updated_at": "2023-03-10T09:15:00Z"
+    }
+  },
+  {
+    "model": "authentication.consumer",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "total_orders": 18,
+      "created_at": "2023-04-05T16:45:00Z",
+      "updated_at": "2023-04-05T16:45:00Z"
+    }
+  },
+  {
+    "model": "authentication.paymentcard",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "card_last4": "1111",
+      "cardholder_name": "Sarah Johnson",
+      "exp_month": 12,
+      "exp_year": 2027,
+      "is_default": true
+    }
+  },
+  {
+    "model": "authentication.paymentcard",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "card_last4": "2222",
+      "cardholder_name": "Mike Davis",
+      "exp_month": 6,
+      "exp_year": 2026,
+      "is_default": true
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 1,
+    "fields": {
+      "name": "Italian",
+      "description": "Authentic Italian cuisine",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 2,
+    "fields": {
+      "name": "Mexican",
+      "description": "Traditional Mexican dishes",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 3,
+    "fields": {
+      "name": "Asian",
+      "description": "Fusion Asian cuisine",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 4,
+    "fields": {
+      "name": "American",
+      "description": "Classic American comfort food",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 1,
+    "fields": {
+      "chef": 1,
+      "name": "Spaghetti Carbonara",
+      "description": "Classic Roman pasta with eggs, cheese, pancetta and pepper",
+      "category": 1,
+      "price": "15.99",
+      "is_available": true,
+      "preparation_time": 20,
+      "created_at": "2023-02-01T12:00:00Z",
+      "updated_at": "2023-02-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 2,
+    "fields": {
+      "chef": 1,
+      "name": "Margherita Pizza",
+      "description": "Traditional Neapolitan pizza with tomato, mozzarella and basil",
+      "category": 1,
+      "price": "18.50",
+      "is_available": true,
+      "preparation_time": 25,
+      "created_at": "2023-02-01T12:00:00Z",
+      "updated_at": "2023-02-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 3,
+    "fields": {
+      "chef": 2,
+      "name": "Chicken Tacos",
+      "description": "Soft corn tortillas filled with seasoned chicken, cilantro and onion",
+      "category": 2,
+      "price": "12.99",
+      "is_available": true,
+      "preparation_time": 15,
+      "created_at": "2023-02-15T12:00:00Z",
+      "updated_at": "2023-02-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 4,
+    "fields": {
+      "chef": 2,
+      "name": "Beef Burrito",
+      "description": "Large flour tortilla with seasoned beef, rice, beans, cheese and salsa",
+      "category": 2,
+      "price": "14.99",
+      "is_available": true,
+      "preparation_time": 20,
+      "created_at": "2023-02-15T12:00:00Z",
+      "updated_at": "2023-02-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 1,
+    "fields": {
+      "dish": 1,
+      "is_primary": true,
+      "created_at": "2023-02-01T12:00:00Z",
+      "updated_at": "2023-02-01T12:00:00Z",
+      "image": "https://example.com/spaghetti-carbonara.jpg"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 2,
+    "fields": {
+      "dish": 2,
+      "is_primary": true,
+      "created_at": "2023-02-01T12:00:00Z",
+      "updated_at": "2023-02-01T12:00:00Z",
+      "image": "https://example.com/margherita-pizza.jpg"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 3,
+    "fields": {
+      "dish": 3,
+      "is_primary": true,
+      "created_at": "2023-02-15T12:00:00Z",
+      "updated_at": "2023-02-15T12:00:00Z",
+      "image": "https://example.com/chicken-tacos.jpg"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 4,
+    "fields": {
+      "dish": 4,
+      "is_primary": true,
+      "created_at": "2023-02-15T12:00:00Z",
+      "updated_at": "2023-02-15T12:00:00Z",
+      "image": "https://example.com/beef-burrito.jpg"
+    }
+  },
+  {
+    "model": "dishes.dishreview",
+    "pk": 1,
+    "fields": {
+      "dish": 1,
+      "customer": 3,
+      "rating": 5,
+      "review_text": "Absolutely delicious! Authentic taste, just like in Rome.",
+      "created_at": "2023-02-05T18:30:00Z",
+      "updated_at": "2023-02-05T18:30:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishreview",
+    "pk": 2,
+    "fields": {
+      "dish": 1,
+      "customer": 4,
+      "rating": 4,
+      "review_text": "Great carbonara, though I prefer it with a bit more pepper.",
+      "created_at": "2023-02-10T20:15:00Z",
+      "updated_at": "2023-02-10T20:15:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishreview",
+    "pk": 3,
+    "fields": {
+      "dish": 2,
+      "customer": 3,
+      "rating": 5,
+      "review_text": "Best pizza I've had outside of Italy!",
+      "created_at": "2023-02-08T19:45:00Z",
+      "updated_at": "2023-02-08T19:45:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishreview",
+    "pk": 4,
+    "fields": {
+      "dish": 3,
+      "customer": 4,
+      "rating": 5,
+      "review_text": "Perfectly seasoned chicken and fresh tortillas. Will order again!",
+      "created_at": "2023-02-18T13:20:00Z",
+      "updated_at": "2023-02-18T13:20:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishvarietysection",
+    "pk": 1,
+    "fields": {
+      "dish": 1,
+      "name": "Size Options",
+      "description": "Choose your preferred portion size",
+      "is_required": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietysection",
+    "pk": 2,
+    "fields": {
+      "dish": 2,
+      "name": "Crust Type",
+      "description": "Select your preferred crust",
+      "is_required": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietysection",
+    "pk": 3,
+    "fields": {
+      "dish": 3,
+      "name": "Spice Level",
+      "description": "How spicy would you like your tacos?",
+      "is_required": false
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 1,
+    "fields": {
+      "section": 1,
+      "name": "Small",
+      "price_adjustment": "0.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 2,
+    "fields": {
+      "section": 1,
+      "name": "Medium",
+      "price_adjustment": "2.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 3,
+    "fields": {
+      "section": 1,
+      "name": "Large",
+      "price_adjustment": "4.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 4,
+    "fields": {
+      "section": 2,
+      "name": "Thin Crust",
+      "price_adjustment": "0.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 5,
+    "fields": {
+      "section": 2,
+      "name": "Thick Crust",
+      "price_adjustment": "1.50",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 6,
+    "fields": {
+      "section": 3,
+      "name": "Mild",
+      "price_adjustment": "0.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 7,
+    "fields": {
+      "section": 3,
+      "name": "Medium",
+      "price_adjustment": "0.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "dishes.dishvarietyoption",
+    "pk": 8,
+    "fields": {
+      "section": 3,
+      "name": "Hot",
+      "price_adjustment": "1.00",
+      "is_available": true
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 5,
+    "fields": {
+      "email": "chef.antonio@example.com",
+      "first_name": "Antonio",
+      "last_name": "Caruso",
+      "phone_number": "+14155551234",
+      "profile_picture": null,
+      "address_longitude": -122.4089,
+      "address_latitude": 37.7858,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z",
+      "password": "pbkdf2_sha256$1000000$zgIYmQGflS5CO3rJbwulCC$pIWKpWUd8SdIMnqowLnGkW/5Yb/VgzcMkeUXsvuDKJg=",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 3,
+    "fields": {
+      "user": 5,
+      "rating": 4.9,
+      "total_reviews": 156,
+      "bio": "French-trained chef specializing in Mediterranean fusion cuisine.",
+      "cuisine_specialties": "French, Mediterranean, Fusion",
+      "years_of_experience": 12,
+      "is_verified": true,
+      "is_online": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 6,
+    "fields": {
+      "email": "chef.yuki@example.com",
+      "first_name": "Yuki",
+      "last_name": "Tanaka",
+      "phone_number": "+14155552345",
+      "profile_picture": null,
+      "address_longitude": -122.3956,
+      "address_latitude": 37.7925,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z",
+      "password": "pbkdf2_sha256$1000000$zgIYmQGflS5CO3rJbwulCC$pIWKpWUd8SdIMnqowLnGkW/5Yb/VgzcMkeUXsvuDKJg=",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 4,
+    "fields": {
+      "user": 6,
+      "rating": 4.95,
+      "total_reviews": 203,
+      "bio": "Master sushi chef with traditional Japanese training from Tokyo.",
+      "cuisine_specialties": "Japanese, Sushi, Asian",
+      "years_of_experience": 15,
+      "is_verified": true,
+      "is_online": true,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 7,
+    "fields": {
+      "email": "chef.priya@example.com",
+      "first_name": "Priya",
+      "last_name": "Sharma",
+      "phone_number": "+14155553456",
+      "profile_picture": null,
+      "address_longitude": -122.4194,
+      "address_latitude": 37.7749,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z",
+      "password": "pbkdf2_sha256$1000000$zgIYmQGflS5CO3rJbwulCC$pIWKpWUd8SdIMnqowLnGkW/5Yb/VgzcMkeUXsvuDKJg=",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 5,
+    "fields": {
+      "user": 7,
+      "rating": 4.7,
+      "total_reviews": 98,
+      "bio": "Passionate Indian chef bringing authentic flavors from Mumbai.",
+      "cuisine_specialties": "Indian, Curry, Vegetarian",
+      "years_of_experience": 9,
+      "is_verified": true,
+      "is_online": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 8,
+    "fields": {
+      "email": "chef.ahmed@example.com",
+      "first_name": "Ahmed",
+      "last_name": "Hassan",
+      "phone_number": "+14155554567",
+      "profile_picture": null,
+      "address_longitude": -122.4015,
+      "address_latitude": 37.7897,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z",
+      "password": "pbkdf2_sha256$1000000$zgIYmQGflS5CO3rJbwulCC$pIWKpWUd8SdIMnqowLnGkW/5Yb/VgzcMkeUXsvuDKJg=",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 6,
+    "fields": {
+      "user": 8,
+      "rating": 4.75,
+      "total_reviews": 112,
+      "bio": "Middle Eastern chef expert in Lebanese and Turkish cuisine.",
+      "cuisine_specialties": "Middle Eastern, Lebanese, Turkish",
+      "years_of_experience": 11,
+      "is_verified": true,
+      "is_online": true,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "authentication.user",
+    "pk": 9,
+    "fields": {
+      "email": "chef.elena@example.com",
+      "first_name": "Elena",
+      "last_name": "Popescu",
+      "phone_number": "+14155555678",
+      "profile_picture": null,
+      "address_longitude": -122.4095,
+      "address_latitude": 37.7823,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z",
+      "password": "pbkdf2_sha256$1000000$zgIYmQGflS5CO3rJbwulCC$pIWKpWUd8SdIMnqowLnGkW/5Yb/VgzcMkeUXsvuDKJg=",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "authentication.chef",
+    "pk": 7,
+    "fields": {
+      "user": 9,
+      "rating": 4.65,
+      "total_reviews": 76,
+      "bio": "Eastern European chef specializing in comfort food and pastries.",
+      "cuisine_specialties": "Eastern European, Romanian, Pastries",
+      "years_of_experience": 7,
+      "is_verified": false,
+      "is_online": false,
+      "created_at": "2023-05-15T10:00:00Z",
+      "updated_at": "2023-05-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 5,
+    "fields": {
+      "chef": 1,
+      "name": "Risotto ai Funghi",
+      "description": "Creamy Italian risotto with porcini mushrooms and parmesan",
+      "category": 1,
+      "price": "19.99",
+      "is_available": true,
+      "preparation_time": 35,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 5,
+    "fields": {
+      "dish": 5,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 6,
+    "fields": {
+      "chef": 1,
+      "name": "Tiramisu",
+      "description": "Classic Italian dessert with espresso-soaked ladyfingers and mascarpone",
+      "category": 1,
+      "price": "9.99",
+      "is_available": true,
+      "preparation_time": 15,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 6,
+    "fields": {
+      "dish": 6,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 7,
+    "fields": {
+      "chef": 1,
+      "name": "Italian Burger",
+      "description": "Beef burger with mozzarella, tomato, basil pesto on ciabatta",
+      "category": 4,
+      "price": "16.99",
+      "is_available": true,
+      "preparation_time": 20,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 7,
+    "fields": {
+      "dish": 7,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 8,
+    "fields": {
+      "chef": 2,
+      "name": "Enchiladas Verdes",
+      "description": "Corn tortillas filled with chicken, covered in green tomatillo salsa",
+      "category": 2,
+      "price": "13.99",
+      "is_available": true,
+      "preparation_time": 25,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 8,
+    "fields": {
+      "dish": 8,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 9,
+    "fields": {
+      "chef": 2,
+      "name": "Churros",
+      "description": "Fried dough pastry with cinnamon sugar and chocolate dipping sauce",
+      "category": 2,
+      "price": "7.99",
+      "is_available": true,
+      "preparation_time": 20,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 9,
+    "fields": {
+      "dish": 9,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 10,
+    "fields": {
+      "chef": 2,
+      "name": "Mexican Bowl",
+      "description": "Rice bowl with black beans, corn, guacamole, and chipotle sauce",
+      "category": 4,
+      "price": "11.99",
+      "is_available": true,
+      "preparation_time": 15,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 10,
+    "fields": {
+      "dish": 10,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 11,
+    "fields": {
+      "chef": 3,
+      "name": "Bouillabaisse",
+      "description": "Traditional French Proven\u00e7al fish stew with saffron and rouille",
+      "category": 1,
+      "price": "24.99",
+      "is_available": true,
+      "preparation_time": 45,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 11,
+    "fields": {
+      "dish": 11,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 12,
+    "fields": {
+      "chef": 3,
+      "name": "Mediterranean Platter",
+      "description": "Hummus, falafel, tabbouleh, olives, and pita bread",
+      "category": 3,
+      "price": "15.99",
+      "is_available": true,
+      "preparation_time": 20,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 12,
+    "fields": {
+      "dish": 12,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 13,
+    "fields": {
+      "chef": 3,
+      "name": "Coq au Vin",
+      "description": "French braised chicken in red wine with mushrooms and pearl onions",
+      "category": 1,
+      "price": "21.99",
+      "is_available": true,
+      "preparation_time": 40,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 13,
+    "fields": {
+      "dish": 13,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 14,
+    "fields": {
+      "chef": 4,
+      "name": "Sushi Omakase",
+      "description": "Chef selection of 12 pieces of premium nigiri sushi",
+      "category": 3,
+      "price": "35.99",
+      "is_available": true,
+      "preparation_time": 30,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 14,
+    "fields": {
+      "dish": 14,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 15,
+    "fields": {
+      "chef": 4,
+      "name": "Ramen Tonkotsu",
+      "description": "Rich pork bone broth with chashu, soft egg, and green onions",
+      "category": 3,
+      "price": "16.99",
+      "is_available": true,
+      "preparation_time": 25,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 15,
+    "fields": {
+      "dish": 15,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 16,
+    "fields": {
+      "chef": 4,
+      "name": "Tempura Moriawase",
+      "description": "Assorted seafood and vegetable tempura with tentsuyu sauce",
+      "category": 3,
+      "price": "18.99",
+      "is_available": true,
+      "preparation_time": 20,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 16,
+    "fields": {
+      "dish": 16,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 17,
+    "fields": {
+      "chef": 5,
+      "name": "Butter Chicken",
+      "description": "Tender chicken in creamy tomato sauce with fenugreek and butter",
+      "category": 3,
+      "price": "14.99",
+      "is_available": true,
+      "preparation_time": 30,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 17,
+    "fields": {
+      "dish": 17,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 18,
+    "fields": {
+      "chef": 5,
+      "name": "Vegetable Biryani",
+      "description": "Fragrant basmati rice with mixed vegetables and aromatic spices",
+      "category": 3,
+      "price": "12.99",
+      "is_available": true,
+      "preparation_time": 35,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 18,
+    "fields": {
+      "dish": 18,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 19,
+    "fields": {
+      "chef": 5,
+      "name": "Garlic Naan",
+      "description": "Traditional Indian flatbread with garlic and butter",
+      "category": 3,
+      "price": "4.99",
+      "is_available": true,
+      "preparation_time": 10,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 19,
+    "fields": {
+      "dish": 19,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 20,
+    "fields": {
+      "chef": 6,
+      "name": "Lamb Shawarma",
+      "description": "Slow-roasted lamb with garlic sauce, pickles, and vegetables",
+      "category": 1,
+      "price": "15.99",
+      "is_available": true,
+      "preparation_time": 25,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 20,
+    "fields": {
+      "dish": 20,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 21,
+    "fields": {
+      "chef": 6,
+      "name": "Falafel Wrap",
+      "description": "Crispy falafel with tahini, hummus, and fresh vegetables",
+      "category": 3,
+      "price": "10.99",
+      "is_available": true,
+      "preparation_time": 15,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 21,
+    "fields": {
+      "dish": 21,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 22,
+    "fields": {
+      "chef": 6,
+      "name": "Mixed Grill",
+      "description": "Combination of kebabs, kofta, and chicken with rice and salad",
+      "category": 1,
+      "price": "22.99",
+      "is_available": true,
+      "preparation_time": 30,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 22,
+    "fields": {
+      "dish": 22,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 23,
+    "fields": {
+      "chef": 7,
+      "name": "Chicken Paprikash",
+      "description": "Hungarian chicken stew with paprika, sour cream, and dumplings",
+      "category": 4,
+      "price": "14.99",
+      "is_available": true,
+      "preparation_time": 35,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 23,
+    "fields": {
+      "dish": 23,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 24,
+    "fields": {
+      "chef": 7,
+      "name": "Sarmale",
+      "description": "Romanian cabbage rolls stuffed with seasoned pork and rice",
+      "category": 4,
+      "price": "13.99",
+      "is_available": true,
+      "preparation_time": 40,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 24,
+    "fields": {
+      "dish": 24,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 25,
+    "fields": {
+      "chef": 7,
+      "name": "Apple Strudel",
+      "description": "Flaky pastry filled with spiced apples, raisins, and cinnamon",
+      "category": 4,
+      "price": "6.99",
+      "is_available": true,
+      "preparation_time": 25,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.dishimage",
+    "pk": 25,
+    "fields": {
+      "dish": 25,
+      "image": null,
+      "is_primary": true,
+      "created_at": "2023-06-01T12:00:00Z",
+      "updated_at": "2023-06-01T12:00:00Z"
+    }
+  }
+]

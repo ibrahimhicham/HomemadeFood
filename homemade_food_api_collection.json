@@ -1,0 +1,2575 @@
+{
+  "info": {
+    "name": "Homemade Food API",
+    "description": "API collection for the Homemade Food platform including Authentication and Dishes modules",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "User Registration",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has token\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone_number\": \"+1234567890\",\n  \"password\": \"securepassword123\",\n  \"address_longitude\": -122.4194,\n  \"address_latitude\": 37.7749,\n  \"user_type\": \"consumer\",\n  \"dietary_preferences\": \"Vegetarian\",\n  \"allergies\": \"Nuts\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/signup/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signup",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chef Registration",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has token\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Chef\",\n  \"last_name\": \"Mario\",\n  \"email\": \"chef.mario@example.com\",\n  \"phone_number\": \"+0987654321\",\n  \"password\": \"securepassword123\",\n  \"address_longitude\": -122.4194,\n  \"address_latitude\": 37.7749,\n  \"user_type\": \"chef\",\n  \"bio\": \"Experienced Italian chef\",\n  \"cuisine_specialties\": \"Pasta, Pizza\",\n  \"years_of_experience\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/signup/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signup",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has token\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('token');",
+                  "    pm.environment.set(\"auth_token\", jsonData.token);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securepassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/logout/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Password Reset Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/password-reset/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "password-reset",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Password Reset Confirm",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uid\": \"dGVzdHVzZXI\",\n  \"token\": \"valid-token\",\n  \"new_password\": \"newsecurepassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/password-reset-confirm/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "password-reset-confirm",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Payment Card",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_number\": \"4111111111111111\",\n  \"cardholder_name\": \"John Doe\",\n  \"exp_month\": 12,\n  \"exp_year\": 2027\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/cards/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "cards",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has user profile\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Chef Profile (PUT)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has updated profile\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"Updated bio for my restaurant\",\n  \"cuisine_specialties\": \"Italian, Mediterranean, French\",\n  \"years_of_experience\": 6\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Chef Profile (PATCH)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has updated profile\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"Partially updated bio for my restaurant\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Consumer Profile (PUT)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has updated profile\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"total_orders\": 15\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Consumer Profile (PATCH)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has updated profile\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"total_orders\": 16\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Profile Picture",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has profile_picture_url\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('profile_picture_url');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profile_picture",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile-picture/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile-picture",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Profile Picture",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile-picture/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile-picture",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Chef Online Status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has is_online\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('is_online');",
+                  "    pm.expect(jsonData).to.have.property('detail');",
+                  "    pm.expect(jsonData).to.have.property('chef');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/chef/toggle-online/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "chef",
+                "toggle-online",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List All Chefs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is paginated\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property(\"count\");",
+                  "    pm.expect(jsonData).to.have.property(\"next\");",
+                  "    pm.expect(jsonData).to.have.property(\"previous\");",
+                  "    pm.expect(jsonData).to.have.property(\"results\");",
+                  "});",
+                  "",
+                  "pm.test(\"Results is an array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.results).to.be.an(\"array\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/chefs/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "chefs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "Search chefs by name, bio, or cuisine specialties. Case-insensitive partial match.",
+                  "disabled": false
+                },
+                {
+                  "key": "is_online",
+                  "value": "",
+                  "description": "Filter by online status. Use \"true\" for online chefs or \"false\" for offline.",
+                  "disabled": false
+                },
+                {
+                  "key": "is_verified",
+                  "value": "",
+                  "description": "Filter by verification status. Use \"true\" for verified chefs or \"false\" for unverified.",
+                  "disabled": false
+                },
+                {
+                  "key": "min_rating",
+                  "value": "",
+                  "description": "Filter chefs with rating greater than or equal to this value (decimal number).",
+                  "disabled": false
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Page number for pagination. Default is 1.",
+                  "disabled": false
+                },
+                {
+                  "key": "page_size",
+                  "value": "",
+                  "description": "Number of results per page. Controls how many chefs are returned in each page.",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Chefs List Endpoint\n\nList all chefs with optional filtering and pagination.\n\n### Query Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `search` | string | No | `?search=Italian` | Search by chef name, bio, or specialties |\n| `is_online` | boolean | No | `?is_online=true` | Filter by online status |\n| `is_verified` | boolean | No | `?is_verified=true` | Filter by verification status |\n| `min_rating` | decimal | No | `?min_rating=4.5` | Minimum rating filter |\n| `page` | integer | No | `?page=2` | Page number for pagination |\n| `page_size` | integer | No | `?page_size=10` | Number of items per page |\n\n### Example Requests\n\n**Get all chefs:**\n```\nGET /api/auth/chefs/\n```\n\n**Search by cuisine:**\n```\nGET /api/auth/chefs/?search=Italian\n```\n\n**Filter by online status:**\n```\nGET /api/auth/chefs/?is_online=true\n```\n\n**Filter by verification:**\n```\nGET /api/auth/chefs/?is_verified=true\n```\n\n**Filter by minimum rating:**\n```\nGET /api/auth/chefs/?min_rating=4.5\n```\n\n**With pagination:**\n```\nGET /api/auth/chefs/?page=2&page_size=10\n```\n\n**Combined filters:**\n```\nGET /api/auth/chefs/?search=Italian&is_online=true&min_rating=4.5&page=1&page_size=10\n```\n\n### Response Format\n\n```json\n{\n  \"count\": 50,\n  \"next\": \"/api/auth/chefs/?page=2\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": 1,\n      \"user\": {\n        \"id\": 1,\n        \"first_name\": \"John\",\n        \"last_name\": \"Chef\",\n        \"email\": \"chef.john@example.com\",\n        \"phone_number\": \"+1234567890\",\n        \"profile_picture\": \"https://example.com/john-chef.jpg\",\n        \"address_longitude\": -122.4194,\n        \"address_latitude\": 37.7749,\n        \"created_at\": \"2023-01-15T10:00:00Z\",\n        \"updated_at\": \"2023-01-15T10:00:00Z\",\n        \"is_active\": true,\n        \"user_type\": \"chef\"\n      },\n      \"rating\": 4.8,\n      \"total_reviews\": 120,\n      \"bio\": \"Experienced Italian chef with 10 years in the industry.\",\n      \"cuisine_specialties\": \"Italian, Mediterranean\",\n      \"years_of_experience\": 10,\n      \"is_verified\": true,\n      \"is_online\": true,\n      \"created_at\": \"2023-01-15T10:00:00Z\",\n      \"updated_at\": \"2023-01-15T10:00:00Z\"\n    }\n  ]\n}\n```\n\n### Response Fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `count` | integer | Total number of chefs matching the filter |\n| `next` | string/null | URL to next page (null if last page) |\n| `previous` | string/null | URL to previous page (null if first page) |\n| `results` | array | Array of chef objects |\n\n### Notes\n\n- All query parameters are optional and can be combined\n- Search searches chef name, bio, and cuisine specialties\n- Default page size is 20",
+            "type": "text/markdown"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dishes",
+      "item": [
+        {
+          "name": "Public",
+          "item": [
+            {
+              "name": "List All Categories",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/categories/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Category Detail",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/categories/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "categories",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List All Dishes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is paginated\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property(\"count\");",
+                      "    pm.expect(jsonData).to.have.property(\"next\");",
+                      "    pm.expect(jsonData).to.have.property(\"previous\");",
+                      "    pm.expect(jsonData).to.have.property(\"results\");",
+                      "});",
+                      "",
+                      "pm.test(\"Results is an array\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.results).to.be.an(\"array\");",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "",
+                      "description": "Search dishes by dish name or chef name (first/last). Case-insensitive partial match.",
+                      "disabled": false
+                    },
+                    {
+                      "key": "category_name",
+                      "value": "",
+                      "description": "Filter dishes by category name. Case-insensitive partial match (e.g., \"Italian\" matches \"Italian Cuisine\").",
+                      "disabled": false
+                    },
+                    {
+                      "key": "chef-id",
+                      "value": "",
+                      "description": "Filter dishes by chef ID. Returns only dishes created by the specified chef.",
+                      "disabled": false
+                    },
+                    {
+                      "key": "min_price",
+                      "value": "",
+                      "description": "Filter dishes with price greater than or equal to this value (decimal number).",
+                      "disabled": false
+                    },
+                    {
+                      "key": "max_price",
+                      "value": "",
+                      "description": "Filter dishes with price less than or equal to this value (decimal number).",
+                      "disabled": false
+                    },
+                    {
+                      "key": "is_available",
+                      "value": "",
+                      "description": "Filter by availability status. Use \"true\" for available dishes or \"false\" for unavailable.",
+                      "disabled": false
+                    },
+                    {
+                      "key": "page",
+                      "value": "",
+                      "description": "Page number for pagination. Default is 1.",
+                      "disabled": false
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "",
+                      "description": "Number of results per page. Controls how many dishes are returned in each page.",
+                      "disabled": false
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "description": {
+                "content": "## Dishes List Endpoint\n\nList all available dishes with optional filtering and pagination.\n\n### Query Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `search` | string | No | `?search=pizza` | Search by dish name or chef name |\n| `category_name` | string | No | `?category_name=Italian` | Filter by category name |\n| `chef-id` | integer | No | `?chef-id=1` | Filter by chef ID |\n| `min_price` | decimal | No | `?min_price=10` | Minimum price filter |\n| `max_price` | decimal | No | `?max_price=25` | Maximum price filter |\n| `is_available` | boolean | No | `?is_available=true` | Filter by availability |\n| `page` | integer | No | `?page=2` | Page number for pagination |\n| `page_size` | integer | No | `?page_size=10` | Number of items per page |\n\n### Example Requests\n\n**Get all dishes:**\n```\nGET /api/dishes/\n```\n\n**Search by dish name:**\n```\nGET /api/dishes/?search=pizza\n```\n\n**Search by chef name:**\n```\nGET /api/dishes/?search=John\n```\n\n**Filter by category:**\n```\nGET /api/dishes/?category_name=Italian\n```\n\n**Filter by chef:**\n```\nGET /api/dishes/?chef-id=1\n```\n\n**Filter by price range:**\n```\nGET /api/dishes/?min_price=10&max_price=25\n```\n\n**With pagination:**\n```\nGET /api/dishes/?page=2&page_size=10\n```\n\n**Combined filters:**\n```\nGET /api/dishes/?search=pizza&category_name=Italian&chef-id=1&min_price=10&max_price=25&page=1&page_size=10\n```\n\n### Response Format\n\n```json\n{\n  \"count\": 50,\n  \"next\": \"/api/dishes/?page=2\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": 1,\n      \"name\": \"Spaghetti Carbonara\",\n      \"price\": \"15.99\",\n      \"is_available\": true,\n      \"preparation_time\": 20,\n      \"chef\": {\n        \"id\": 1,\n        \"first_name\": \"John\",\n        \"last_name\": \"Chef\"\n      },\n      \"category\": {\n        \"id\": 1,\n        \"name\": \"Italian\"\n      },\n      \"created_at\": \"2026-02-24T22:32:30.758770Z\",\n      \"average_rating\": 4.5,\n      \"image\": null\n    }\n  ]\n}\n```\n\n### Response Fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `count` | integer | Total number of dishes matching the filter |\n| `next` | string/null | URL to next page (null if last page) |\n| `previous` | string/null | URL to previous page (null if first page) |\n| `results` | array | Array of dish objects |\n\n### Notes\n\n- All query parameters are optional and can be combined\n- Search searches both dish name and chef name (first/last)\n- Category name search is case-insensitive partial match\n- Default page size is determined by server configuration",
+                "type": "text/markdown"
+              }
+            },
+            {
+              "name": "Get Dish Detail",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response has dish id\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('id');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has chef info\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('chef');",
+                      "    pm.expect(jsonData.chef).to.have.property('name');",
+                      "    pm.expect(jsonData.chef).to.have.property('rating');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has rating_avg\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('rating_avg');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has reviews_count\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('reviews_count');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has reviews_preview\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('reviews_preview');",
+                      "    pm.expect(jsonData.reviews_preview).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": [],
+              "description": {
+                "content": "## Dish Detail Endpoint\n\nGet detailed information about a specific dish including chef info, ratings, and review preview.\n\n### URL Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `id` | integer | Yes | `/api/dishes/1/` | The unique dish ID |\n\n### Example Request\n\n```\nGET /api/dishes/1/\n```\n\n### Response Format\n\n```json\n{\n  \"id\": 1,\n  \"name\": \"Spaghetti Carbonara\",\n  \"description\": \"Classic Roman pasta with eggs, cheese, pancetta and pepper\",\n  \"price\": \"15.99\",\n  \"is_available\": true,\n  \"preparation_time\": 20,\n  \"chef\": {\n    \"id\": 1,\n    \"name\": \"Chef John Chef\",\n    \"rating\": 4.8,\n    \"total_reviews\": 120,\n    \"specialties\": [\"Italian\", \"Mediterranean\"],\n    \"profile_picture\": \"/media/profile_pics/chef1.jpg\"\n  },\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Italian\",\n    \"description\": \"Authentic Italian cuisine\",\n    \"dish_count\": 8\n  },\n  \"images\": [\n    {\n      \"id\": 1,\n      \"image_url\": \"/media/dishes/carbonara.jpg\",\n      \"is_primary\": true\n    }\n  ],\n  \"reviews_preview\": [\n    {\n      \"id\": 5,\n      \"user_name\": \"Sarah\",\n      \"rating\": 5,\n      \"review_text\": \"Absolutely delicious!\",\n      \"created_at\": \"2026-03-07T18:30:00Z\"\n    },\n    {\n      \"id\": 4,\n      \"user_name\": \"Mike\",\n      \"rating\": 4,\n      \"review_text\": \"Great taste, good portion.\",\n      \"created_at\": \"2026-03-05T20:15:00Z\"\n    }\n  ],\n  \"variety_sections\": [\n    {\n      \"id\": 1,\n      \"name\": \"Size Options\",\n      \"description\": \"Choose your portion size\",\n      \"is_required\": false,\n      \"options\": [\n        {\"id\": 1, \"name\": \"Small\", \"price_adjustment\": \"0.00\", \"is_available\": true},\n        {\"id\": 2, \"name\": \"Large\", \"price_adjustment\": \"4.00\", \"is_available\": true}\n      ]\n    }\n  ],\n  \"rating_avg\": 4.5,\n  \"reviews_count\": 1243,\n  \"created_at\": \"2023-02-01T12:00:00Z\",\n  \"updated_at\": \"2023-02-01T12:00:00Z\"\n}\n```\n\n### Response Fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `id` | integer | Unique dish identifier |\n| `name` | string | Dish name |\n| `description` | string | Full dish description |\n| `price` | string | Base price (decimal as string) |\n| `is_available` | boolean | Whether dish can be ordered |\n| `preparation_time` | integer | Estimated prep time in minutes |\n| `chef` | object | Chef information |\n| `chef.id` | integer | Chef's user ID |\n| `chef.name` | string | Chef's full name with \"Chef\" prefix |\n| `chef.rating` | number | Chef's average rating (0-5) |\n| `chef.total_reviews` | integer | Total reviews across all chef's dishes |\n| `chef.specialties` | array | List of cuisine specialties |\n| `chef.profile_picture` | string/null | Chef's profile picture URL |\n| `category` | object | Category information |\n| `images` | array | Array of dish images |\n| `reviews_preview` | array | Latest 3 reviews (preview only) |\n| `reviews_preview[].user_name` | string | Reviewer's first name |\n| `reviews_preview[].rating` | integer | Rating 1-5 |\n| `reviews_preview[].review_text` | string | Review comment |\n| `variety_sections` | array | Customization options (sizes, toppings, etc.) |\n| `rating_avg` | number | Average dish rating (0-5) |\n| `reviews_count` | integer | Total number of reviews |\n| `created_at` | datetime | When dish was created |\n| `updated_at` | datetime | Last modification timestamp |\n\n### Notes\n\n- `reviews_preview` contains only the **latest 3 reviews** for performance\n- Use the **Get Dish Reviews** endpoint with pagination to fetch all reviews\n- `rating_avg` and `reviews_count` are computed efficiently via database annotations",
+                "type": "text/markdown"
+              }
+            },
+            {
+              "name": "Get Dish Reviews",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is paginated\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('count');",
+                      "    pm.expect(jsonData).to.have.property('next');",
+                      "    pm.expect(jsonData).to.have.property('previous');",
+                      "    pm.expect(jsonData).to.have.property('results');",
+                      "});",
+                      "",
+                      "pm.test(\"Results is an array\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.results).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/reviews/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "reviews",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "",
+                      "description": "Page number for pagination",
+                      "disabled": false
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "",
+                      "description": "Number of results per page (max 100)",
+                      "disabled": false
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "description": {
+                "content": "## Dish Reviews Endpoint (Paginated)\n\nGet all reviews for a specific dish with pagination support.\n\n### URL Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `dish_id` | integer | Yes | `/api/dishes/1/reviews/` | The dish ID to get reviews for |\n\n### Query Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `page` | integer | No | `?page=2` | Page number for pagination |\n| `page_size` | integer | No | `?page_size=10` | Number of results per page (default: 20, max: 100) |\n\n### Example Requests\n\n**Get first page of reviews (default 20 per page):**\n```\nGET /api/dishes/1/reviews/\n```\n\n**Get specific page:**\n```\nGET /api/dishes/1/reviews/?page=2\n```\n\n**Custom page size:**\n```\nGET /api/dishes/1/reviews/?page=1&page_size=10\n```\n\n### Response Format\n\n```json\n{\n  \"count\": 1243,\n  \"next\": \"/api/dishes/1/reviews/?page=2&page_size=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": 5,\n      \"dish\": 1,\n      \"customer\": {\n        \"id\": 3,\n        \"first_name\": \"Sarah\",\n        \"last_name\": \"Johnson\",\n        \"email\": \"consumer.sarah@example.com\",\n        \"profile_picture\": \"/media/profile_pics/sarah.jpg\"\n      },\n      \"rating\": 5,\n      \"review_text\": \"Absolutely delicious! Authentic taste.\",\n      \"created_at\": \"2026-03-07T18:30:00Z\",\n      \"updated_at\": \"2026-03-07T18:30:00Z\"\n    },\n    {\n      \"id\": 4,\n      \"dish\": 1,\n      \"customer\": {\n        \"id\": 4,\n        \"first_name\": \"Mike\",\n        \"last_name\": \"Davis\",\n        \"email\": \"consumer.mike@example.com\",\n        \"profile_picture\": null\n      },\n      \"rating\": 4,\n      \"review_text\": \"Great carbonara, though I prefer more pepper.\",\n      \"created_at\": \"2026-03-05T20:15:00Z\",\n      \"updated_at\": \"2026-03-05T20:15:00Z\"\n    }\n  ]\n}\n```\n\n### Response Fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `count` | integer | Total number of reviews |\n| `next` | string/null | URL to next page (null if last page) |\n| `previous` | string/null | URL to previous page (null if first page) |\n| `results` | array | Array of review objects |\n\n### Review Object Fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `id` | integer | Review ID |\n| `dish` | integer | Dish ID (reference) |\n| `customer` | object | Customer who wrote the review |\n| `customer.id` | integer | Customer user ID |\n| `customer.first_name` | string | Customer's first name |\n| `customer.last_name` | string | Customer's last name |\n| `customer.email` | string | Customer's email |\n| `customer.profile_picture` | string/null | Profile picture URL |\n| `rating` | integer | Rating score (1-5) |\n| `review_text` | string | Written review comment |\n| `created_at` | datetime | When review was created |\n| `updated_at` | datetime | Last update timestamp |\n\n### Notes\n\n- Reviews are ordered by **created_at descending** (newest first)\n- Default page size is **20 reviews per page**\n- Maximum page size is **100 reviews per page**\n- Use `page` and `page_size` query parameters for pagination",
+                "type": "text/markdown"
+              }
+            },
+            {
+              "name": "Get Consumer Homepage",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response has categories\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('categories');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has featured_dishes\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('featured_dishes');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has top_chefs\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('top_chefs');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has new_dishes\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('new_dishes');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/home/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "home",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Chef",
+          "item": [
+            {
+              "name": "List Chef Categories",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Category",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Main Course\",\n  \"description\": \"Delicious main courses\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Category",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Main Course\",\n  \"description\": \"Updated description\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Category",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Chef Dishes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Dish",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test Dish\",\n  \"description\": \"A delicious test dish\",\n  \"price\": 15.99,\n  \"preparation_time\": 30,\n  \"category_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Test Dish\",\n  \"description\": \"An updated delicious test dish\",\n  \"price\": 17.99,\n  \"preparation_time\": 35,\n  \"category_id\": 1,\n  \"is_available\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Dish Variety Section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Size Options\",\n  \"description\": \"Choose your preferred size\",\n  \"is_required\": false\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish Variety Section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Size Options\",\n  \"description\": \"Choose your updated preferred size\",\n  \"is_required\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish Variety Section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Dish Variety Option",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Large\",\n  \"price_adjustment\": 4.00,\n  \"is_available\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/options/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    "options",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish Variety Option",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Extra Large\",\n  \"price_adjustment\": 6.00,\n  \"is_available\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    "options",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish Variety Option",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    "options",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Upload Dish Image",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.test(\"Response has image_url\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('image_url');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "src": []
+                    },
+                    {
+                      "key": "is_primary",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/create/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "create",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish Image",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "src": []
+                    },
+                    {
+                      "key": "is_primary",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish Image",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Search Dishes by Chef Name",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?search=John",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "John"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Consumer",
+          "item": [
+            {
+              "name": "Add Dish Review",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rating\": 5,\n  \"review_text\": \"Excellent dish! Highly recommended.\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/reviews/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "reviews",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Search Dishes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?search=pizza",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "pizza"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Filter Dishes by Category and Search",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?search=chicken&category_name=Mexican",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "chicken"
+                    },
+                    {
+                      "key": "category_name",
+                      "value": "Mexican"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List Orders",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is paginated\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property(\"count\");",
+                  "    pm.expect(jsonData).to.have.property(\"results\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/orders/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "",
+                  "description": "Filter by order status (pending, accepted, out_for_delivery, delivered, cancelled, rejected)",
+                  "disabled": true
+                },
+                {
+                  "key": "date_from",
+                  "value": "",
+                  "description": "Filter orders from this date onwards (YYYY-MM-DD)",
+                  "disabled": true
+                },
+                {
+                  "key": "date_to",
+                  "value": "",
+                  "description": "Filter orders up to this date (YYYY-MM-DD)",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Page number for pagination",
+                  "disabled": true
+                },
+                {
+                  "key": "page_size",
+                  "value": "",
+                  "description": "Number of results per page (default: 20, max: 100)",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## List Orders\n\nList orders filtered by user role (consumer sees own orders, chef sees received orders).\n\n### Query Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `status` | string | No | `?status=pending` | Filter by order status |\n| `date_from` | date | No | `?date_from=2024-01-01` | Filter from date |\n| `date_to` | date | No | `?date_to=2024-12-31` | Filter to date |\n| `page` | integer | No | `?page=2` | Page number |\n| `page_size` | integer | No | `?page_size=10` | Results per page |\n\n### Response Format\n\n```json\n{\n  \"count\": 5,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [\n    {\n      \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"customer_name\": \"John Doe\",\n      \"chef_name\": \"Chef Mario\",\n      \"status\": \"pending\",\n      \"total_amount\": \"35.98\",\n      \"created_at\": \"2024-01-15T10:00:00Z\",\n      \"items_count\": 2,\n      \"estimated_ready_time\": \"2024-01-15T10:30:00Z\"\n    }\n  ]\n}\n```",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Create Order",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has order_id\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('order_id');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chef_id\": 2,\n  \"delivery_address\": \"123 Main St, City, State\",\n  \"delivery_longitude\": -122.4194,\n  \"delivery_latitude\": 37.7749,\n  \"special_instructions\": \"Leave at door\",\n  \"items\": [\n    {\n      \"dish_id\": 1,\n      \"quantity\": 2,\n      \"special_requests\": \"No onions\",\n      \"variety_selections\": [\n        {\"section_id\": 1, \"option_id\": 1},\n        {\"section_id\": 2, \"option_id\": 3}\n      ]\n    },\n    {\n      \"dish_id\": 3,\n      \"quantity\": 1,\n      \"special_requests\": \"Extra spicy\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/create/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Create Order\n\nPlace a new order (consumer only). All items must belong to the same chef.\n\n### Request Body\n\n```json\n{\n  \"chef_id\": 2,\n  \"delivery_address\": \"123 Main St\",\n  \"delivery_longitude\": -122.4194,\n  \"delivery_latitude\": 37.7749,\n  \"special_instructions\": \"Optional notes\",\n  \"items\": [\n    {\n      \"dish_id\": 1,\n      \"quantity\": 2,\n      \"special_requests\": \"No onions\",\n      \"variety_selections\": [\n        {\"section_id\": 1, \"option_id\": 1}\n      ]\n    }\n  ]\n}\n```\n\n### Fields\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `chef_id` | integer | Yes | Chef who will fulfill the order |\n| `delivery_address` | string | Yes | Full delivery address |\n| `delivery_longitude` | decimal | No | Delivery location longitude |\n| `delivery_latitude` | decimal | No | Delivery location latitude |\n| `special_instructions` | string | No | General order notes |\n| `items` | array | Yes | List of order items |\n| `items[].dish_id` | integer | Yes | Dish to order |\n| `items[].quantity` | integer | Yes | Quantity (min: 1) |\n| `items[].special_requests` | string | No | Per-item notes |\n| `items[].variety_selections` | array | No | Size/options selections |\n| `variety_selections[].section_id` | integer | Yes | Variety section ID |\n| `variety_selections[].option_id` | integer | Yes | Variety option ID |\n\n### Response\n\nReturns full order detail with `order_id` (UUID), items, pricing, and timestamps.",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Get Order Detail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has items array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('items');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/orders/123e4567-e89b-12d3-a456-426614174000/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "123e4567-e89b-12d3-a456-426614174000",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Get Order Detail\n\nGet full order details including all items and variety selections.\n\n### URL Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `order_id` | UUID | Yes | `/api/orders/{uuid}/` | The order UUID |\n\n### Response Format\n\n```json\n{\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"customer\": 3,\n  \"customer_name\": \"John Doe\",\n  \"chef\": 2,\n  \"chef_name\": \"Chef Mario\",\n  \"status\": \"accepted\",\n  \"subtotal\": \"25.98\",\n  \"delivery_fee\": \"10.00\",\n  \"total_amount\": \"35.98\",\n  \"estimated_preparation_minutes\": 30,\n  \"estimated_ready_time\": \"2024-01-15T10:30:00Z\",\n  \"delivery_address\": \"123 Main St\",\n  \"special_instructions\": \"Leave at door\",\n  \"created_at\": \"2024-01-15T10:00:00Z\",\n  \"accepted_at\": \"2024-01-15T10:05:00Z\",\n  \"items\": [\n    {\n      \"id\": 1,\n      \"dish_name\": \"Spaghetti Carbonara\",\n      \"dish_base_price\": \"15.99\",\n      \"quantity\": 2,\n      \"unit_price\": \"15.99\",\n      \"item_total\": \"31.98\",\n      \"special_requests\": \"No onions\",\n      \"variety_selections\": [\n        {\n          \"section_name\": \"Size Options\",\n          \"option_name\": \"Large\",\n          \"price_adjustment\": \"4.00\"\n        }\n      ]\n    }\n  ]\n}\n```",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Status updated\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.equal('accepted');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"accepted\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/123e4567-e89b-12d3-a456-426614174000/status/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "123e4567-e89b-12d3-a456-426614174000",
+                "status",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Update Order Status\n\nTransition order to a new status. Only valid transitions allowed per status flow.\n\n### Valid Status Transitions\n\n| From | To | Actor |\n|------|----|-------|\n| `pending` | `accepted` | Chef |\n| `pending` | `rejected` | Chef |\n| `pending` | `cancelled` | Chef or Consumer |\n| `accepted` | `out_for_delivery` | Chef |\n| `accepted` | `cancelled` | Chef |\n| `out_for_delivery` | `delivered` | Chef |\n\n### Request Body\n\n```json\n{\n  \"status\": \"accepted\",\n  \"cancellation_reason\": \"Optional reason if cancelling\"\n}\n```\n\n### Fields\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `status` | string | Yes | New status |\n| `cancellation_reason` | string | No | Reason for cancellation |\n\n### WebSocket Events\n\nOn success, broadcasts:\n- `status_update` to order-specific group\n- `notification` to affected user",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "List Notifications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/orders/notifications/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "notifications",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## List Notifications\n\nGet all order notifications for the authenticated user.\n\n### Response Format\n\n```json\n[\n  {\n    \"id\": 1,\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"notification_type\": \"order_accepted\",\n    \"notification_type_display\": \"Order Accepted\",\n    \"message\": \"Your order has been accepted.\",\n    \"is_read\": false,\n    \"created_at\": \"2024-01-15T10:05:00Z\"\n  }\n]\n```\n\n### Notification Types\n\n| Type | Description |\n|------|-------------|\n| `order_placed` | New order placed |\n| `order_accepted` | Chef accepted order |\n| `order_rejected` | Chef rejected order |\n| `order_cancelled` | Order cancelled |\n| `preparation_reminder` | Reminder to chef |\n| `out_for_delivery` | Order on the way |\n| `delivered` | Order delivered |",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Notification is read\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.is_read).to.equal(true);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/notifications/1/read/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "notifications",
+                "1",
+                "read",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Mark Notification as Read\n\nMark a single notification as read.\n\n### URL Parameters\n\n| Parameter | Type | Required | Description |\n|-----------|------|----------|-------------|\n| `pk` | integer | Yes | Notification ID |\n\n### Response\n\nReturns the updated notification object with `is_read: true`.",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Cancel Expired Orders (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has cancelled_count\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('cancelled_count');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/cancel-expired/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "cancel-expired",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Cancel Expired Orders\n\nManually trigger auto-cancellation for pending orders older than 5 minutes.\n\n**Requires admin/staff authentication.**\n\n### Response\n\n```json\n{\n  \"cancelled_count\": 3\n}\n```\n\n### Notes\n\n- Only cancels orders with `status=pending` and `created_at > 5 minutes ago`\n- Sends notification to affected customers\n- In production, this runs automatically via Celery beat every minute",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "WebSocket: Connect to Orders",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "ws://localhost:8000/ws/orders/",
+              "protocol": "ws",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "ws",
+                "orders",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## WebSocket: Orders Real-Time Updates\n\nConnect to receive real-time order notifications and status updates.\n\n**URL:** `ws://localhost:8000/ws/orders/`\n\n### Authentication\n\nUses Django session/auth middleware. Must be authenticated.\n\n### Client Messages\n\n**Subscribe to order updates:**\n```json\n{\n  \"action\": \"subscribe_order\",\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\n```\n\n**Unsubscribe from order:**\n```json\n{\n  \"action\": \"unsubscribe_order\",\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\n```\n\n### Server Messages\n\n**New notification:**\n```json\n{\n  \"type\": \"notification\",\n  \"data\": {\n    \"notification_type\": \"order_accepted\",\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"message\": \"Your order has been accepted.\",\n    \"created_at\": \"2024-01-15T10:05:00Z\"\n  }\n}\n```\n\n**Status update:**\n```json\n{\n  \"type\": \"status_update\",\n  \"data\": {\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"status\": \"accepted\",\n    \"updated_at\": \"2024-01-15T10:05:00Z\",\n    \"estimated_ready_time\": \"2024-01-15T10:35:00Z\"\n  }\n}\n```\n\n**New order (chef only):**\n```json\n{\n  \"type\": \"new_order\",\n  \"data\": {\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"customer_name\": \"John Doe\",\n    \"total_amount\": \"35.98\",\n    \"items_count\": 2,\n    \"message\": \"New order from John Doe\",\n    \"created_at\": \"2024-01-15T10:00:00Z\"\n  }\n}\n```\n\n**Subscription confirmed:**\n```json\n{\n  \"type\": \"subscribed\",\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\n```\n\n### JavaScript Example\n\n```javascript\nconst ws = new WebSocket('ws://localhost:8000/ws/orders/');\n\nws.onopen = () => {\n  console.log('Connected');\n  ws.send(JSON.stringify({\n    action: 'subscribe_order',\n    order_id: '123e4567-e89b-12d3-a456-426614174000'\n  }));\n};\n\nws.onmessage = (event) => {\n  const message = JSON.parse(event.data);\n  console.log(message.type, message.data);\n};\n```\n\n### Groups\n\n| Group | Purpose |\n|-------|---------|\n| `user_{user_id}` | Personal notifications |\n| `order_{order_id}` | Order-specific status updates |",
+            "type": "text/markdown"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    }
+  ]
+}

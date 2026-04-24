@@ -1,0 +1,148 @@
+@startuml
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #000000
+skinparam classArrowColor #000000
+
+title Database Structure - Homemade Food Authentication Service
+
+package "Authentication Module" {
+  class User {
+    - id: int [PK]
+    - email: str [UNIQUE]
+    - first_name: str
+    - last_name: str
+    - phone_number: str [UNIQUE]
+    - profile_picture_url: str
+    - address_longitude: Decimal
+    - address_latitude: Decimal
+    - created_at: datetime
+    - updated_at: datetime
+    - is_active: bool
+    - is_staff: bool
+    - password: str
+    - is_superuser: bool
+  }
+
+  class Chef {
+    - id: int [PK]
+    - user_id: int [FK -> User.id]
+    - rating: Decimal
+    - total_reviews: int
+    - bio: text
+    - cuisine_specialties: str
+    - years_of_experience: int
+    - is_verified: bool
+    - created_at: datetime
+    - updated_at: datetime
+  }
+
+  class Consumer {
+    - id: int [PK]
+    - user_id: int [FK -> User.id]
+    - dietary_preferences: str
+    - allergies: text
+    - total_orders: int
+    - created_at: datetime
+    - updated_at: datetime
+  }
+
+  class PaymentCard {
+    - id: int [PK]
+    - user_id: int [FK -> User.id]
+    - card_last4: str
+    - cardholder_name: str
+    - exp_month: int
+    - exp_year: int
+    - is_default: bool
+    - created_at: datetime
+  }
+}
+
+package "Dishes Module" {
+  class Category {
+    - id: int [PK]
+    - name: str [UNIQUE]
+    - description: text
+    - created_at: datetime
+    - updated_at: datetime
+  }
+
+  class Dish {
+    - id: int [PK]
+    - chef_id: int [FK -> User.id]
+    - name: str
+    - description: text
+    - category_id: int [FK -> Category.id]
+    - price: Decimal
+    - is_available: bool
+    - preparation_time: int
+    - created_at: datetime
+    - updated_at: datetime
+  }
+
+  class DishReview {
+    - id: int [PK]
+    - dish_id: int [FK -> Dish.id]
+    - customer_id: int [FK -> User.id]
+    - rating: int
+    - review_text: text
+    - created_at: datetime
+    - updated_at: datetime
+  }
+
+  class DishImage {
+    - id: int [PK]
+    - dish_id: int [FK -> Dish.id]
+    - image_url: str
+    - is_primary: bool
+    - created_at: datetime
+    - updated_at: datetime
+  }
+}
+
+package "Orders Module" {
+  class Order {
+    - id: UUID [PK]
+    - customer_id: int [FK -> User.id]
+    - chef_id: int [FK -> User.id]
+    - status: str
+    - total_amount: Decimal
+    - delivery_address: text
+    - delivery_longitude: Decimal
+    - delivery_latitude: Decimal
+    - estimated_delivery_time: datetime
+    - special_instructions: text
+    - created_at: datetime
+    - updated_at: datetime
+  }
+
+  class OrderItem {
+    - id: int [PK]
+    - order_id: UUID [FK -> Order.id]
+    - dish_id: int [FK -> Dish.id]
+    - quantity: int
+    - unit_price: Decimal
+    - special_requests: text
+  }
+}
+
+' Relationships
+User ||--o{ Chef : "OneToOne"
+User ||--o{ Consumer : "OneToOne"
+User ||--o{ PaymentCard : "OneToMany"
+User ||--o{ Dish : "OneToMany (as chef)"
+User ||--o{ DishReview : "OneToMany (as customer)"
+
+Category ||--o{ Dish : "OneToMany"
+Dish ||--o{ DishReview : "OneToMany"
+Dish ||--o{ DishImage : "OneToMany"
+Dish ||--o{ OrderItem : "OneToMany"
+
+Order ||--o{ OrderItem : "OneToMany"
+
+Order ||--|| User : "customer"
+Order ||--|| User : "chef"
+
+@enduml
