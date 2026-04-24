@@ -5,7 +5,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.utils import timezone
-
+from django.conf import settings
 
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, phone_number, password=None, **extra_fields):
@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=20, unique=True)
-    profile_picture = models.ImageField(upload_to='profiles/', default='profiles/profilepicture_mae8dg.jpg')
+    profile_picture = models.ImageField(upload_to='profiles/', default=settings.DEFAULT_PROFILE_PICTURE)
     address_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     address_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)

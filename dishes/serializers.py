@@ -176,7 +176,7 @@ class ChefInfoSerializer(serializers.ModelSerializer):
     def get_profile_picture(self, obj):
         if obj.profile_picture:
             return obj.profile_picture.url
-        return settings.DEFAULT_AVATAR
+        return settings.DEFAULT_PROFILE_PICTURE
 
 
 class DishSerializer(serializers.ModelSerializer):
@@ -275,7 +275,7 @@ class TopChefSerializer(serializers.ModelSerializer):
             'id': obj.user.id,
             'first_name': obj.user.first_name,
             'last_name': obj.user.last_name,
-            'profile_picture': obj.user.profile_picture.url if obj.user.profile_picture else settings.DEFAULT_AVATAR
+            'profile_picture': obj.user.profile_picture.url if obj.user.profile_picture else settings.DEFAULT_PROFILE_PICTURE
         }
 
 
