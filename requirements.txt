@@ -16,6 +16,7 @@ Django==5.2.7
 django-cloudinary-storage==0.3.0
 django-cors-headers==4.9.0
 djangorestframework==3.16.1
+dotenv==0.9.9
 hyperlink==21.0.0
 idna==3.11
 Incremental==24.11.0
@@ -27,6 +28,7 @@ pyasn1==0.6.3
 pyasn1_modules==0.4.2
 pycparser==3.0
 pyOpenSSL==26.0.0
+python-dotenv==1.2.2
 redis==7.4.0
 requests==2.33.1
 service-identity==24.2.0
