@@ -7,7 +7,7 @@
       "first_name": "John",
       "last_name": "Chef",
       "phone_number": "+1234567890",
-      "profile_picture": "https://example.com/john-chef.jpg",
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.4194,
       "address_latitude": 37.7749,
       "is_active": true,
@@ -25,7 +25,7 @@
       "first_name": "Maria",
       "last_name": "Gonzalez",
       "phone_number": "+1987654321",
-      "profile_picture": "https://example.com/maria-chef.jpg",
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.3301,
       "address_latitude": 37.6879,
       "is_active": true,
@@ -43,7 +43,7 @@
       "first_name": "Sarah",
       "last_name": "Johnson",
       "phone_number": "+1555123456",
-      "profile_picture": "https://example.com/sarah-consumer.jpg",
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.2711,
       "address_latitude": 37.8044,
       "is_active": true,
@@ -61,7 +61,7 @@
       "first_name": "Mike",
       "last_name": "Davis",
       "phone_number": "+1555987654",
-      "profile_picture": "https://example.com/mike-consumer.jpg",
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.4473,
       "address_latitude": 37.7622,
       "is_active": true,
@@ -255,7 +255,7 @@
       "is_primary": true,
       "created_at": "2023-02-01T12:00:00Z",
       "updated_at": "2023-02-01T12:00:00Z",
-      "image": "https://example.com/spaghetti-carbonara.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
     }
   },
   {
@@ -266,7 +266,7 @@
       "is_primary": true,
       "created_at": "2023-02-01T12:00:00Z",
       "updated_at": "2023-02-01T12:00:00Z",
-      "image": "https://example.com/margherita-pizza.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
     }
   },
   {
@@ -277,7 +277,7 @@
       "is_primary": true,
       "created_at": "2023-02-15T12:00:00Z",
       "updated_at": "2023-02-15T12:00:00Z",
-      "image": "https://example.com/chicken-tacos.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
     }
   },
   {
@@ -288,7 +288,7 @@
       "is_primary": true,
       "created_at": "2023-02-15T12:00:00Z",
       "updated_at": "2023-02-15T12:00:00Z",
-      "image": "https://example.com/beef-burrito.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
     }
   },
   {
@@ -457,7 +457,7 @@
       "first_name": "Antonio",
       "last_name": "Caruso",
       "phone_number": "+14155551234",
-      "profile_picture": null,
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.4089,
       "address_latitude": 37.7858,
       "is_active": true,
@@ -492,7 +492,7 @@
       "first_name": "Yuki",
       "last_name": "Tanaka",
       "phone_number": "+14155552345",
-      "profile_picture": null,
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.3956,
       "address_latitude": 37.7925,
       "is_active": true,
@@ -527,7 +527,7 @@
       "first_name": "Priya",
       "last_name": "Sharma",
       "phone_number": "+14155553456",
-      "profile_picture": null,
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.4194,
       "address_latitude": 37.7749,
       "is_active": true,
@@ -562,7 +562,7 @@
       "first_name": "Ahmed",
       "last_name": "Hassan",
       "phone_number": "+14155554567",
-      "profile_picture": null,
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.4015,
       "address_latitude": 37.7897,
       "is_active": true,
@@ -597,7 +597,7 @@
       "first_name": "Elena",
       "last_name": "Popescu",
       "phone_number": "+14155555678",
-      "profile_picture": null,
+      "profile_picture": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041924/profilepicture_mae8dg.jpg",
       "address_longitude": -122.4095,
       "address_latitude": 37.7823,
       "is_active": true,
@@ -644,7 +644,7 @@
     "pk": 5,
     "fields": {
       "dish": 5,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -670,7 +670,7 @@
     "pk": 6,
     "fields": {
       "dish": 6,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -696,7 +696,7 @@
     "pk": 7,
     "fields": {
       "dish": 7,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -722,7 +722,7 @@
     "pk": 8,
     "fields": {
       "dish": 8,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -748,7 +748,7 @@
     "pk": 9,
     "fields": {
       "dish": 9,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -774,7 +774,7 @@
     "pk": 10,
     "fields": {
       "dish": 10,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -800,7 +800,7 @@
     "pk": 11,
     "fields": {
       "dish": 11,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -826,7 +826,7 @@
     "pk": 12,
     "fields": {
       "dish": 12,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -852,7 +852,7 @@
     "pk": 13,
     "fields": {
       "dish": 13,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -878,7 +878,7 @@
     "pk": 14,
     "fields": {
       "dish": 14,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -904,7 +904,7 @@
     "pk": 15,
     "fields": {
       "dish": 15,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -930,7 +930,7 @@
     "pk": 16,
     "fields": {
       "dish": 16,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -956,7 +956,7 @@
     "pk": 17,
     "fields": {
       "dish": 17,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -982,7 +982,7 @@
     "pk": 18,
     "fields": {
       "dish": 18,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1008,7 +1008,7 @@
     "pk": 19,
     "fields": {
       "dish": 19,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1034,7 +1034,7 @@
     "pk": 20,
     "fields": {
       "dish": 20,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1060,7 +1060,7 @@
     "pk": 21,
     "fields": {
       "dish": 21,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1086,7 +1086,7 @@
     "pk": 22,
     "fields": {
       "dish": 22,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1112,7 +1112,7 @@
     "pk": 23,
     "fields": {
       "dish": 23,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1138,7 +1138,7 @@
     "pk": 24,
     "fields": {
       "dish": 24,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1164,7 +1164,7 @@
     "pk": 25,
     "fields": {
       "dish": 25,
-      "image": null,
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"

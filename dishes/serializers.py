@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Category, Dish, DishReview, DishImage, DishVarietySection, DishVarietyOption
 from authentication.models import User, Chef
 from authentication.serializers import UserSerializer
+from django.conf import settings
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -27,11 +28,12 @@ class DishImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image_url', 'is_primary', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
+    
+
     def get_image_url(self, obj):
-        """Return full URL for the image"""
         if obj.image:
             return obj.image.url
-        return None
+        return settings.DEFAULT_DISH_IMAGE
 
 
 class DishReviewSerializer(serializers.ModelSerializer):
@@ -103,7 +105,7 @@ class DishListSerializer(serializers.ModelSerializer):
         primary_image = obj.images.filter(is_primary=True).first()
         if primary_image and primary_image.image:
             return primary_image.image.url
-        return None
+        return settings.DEFAULT_DISH_IMAGE
 
 
 class DishVarietyOptionSerializer(serializers.ModelSerializer):
@@ -129,6 +131,7 @@ class ChefInfoSerializer(serializers.ModelSerializer):
     rating = serializers.SerializerMethodField()
     total_reviews = serializers.SerializerMethodField()
     is_online = serializers.SerializerMethodField()
+    profile_picture = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -169,6 +172,11 @@ class ChefInfoSerializer(serializers.ModelSerializer):
             if chef_profile:
                 return chef_profile.is_online
         return False
+    
+    def get_profile_picture(self, obj):
+        if obj.profile_picture:
+            return obj.profile_picture.url
+        return settings.DEFAULT_AVATAR
 
 
 class DishSerializer(serializers.ModelSerializer):
@@ -267,7 +275,7 @@ class TopChefSerializer(serializers.ModelSerializer):
             'id': obj.user.id,
             'first_name': obj.user.first_name,
             'last_name': obj.user.last_name,
-            'profile_picture': obj.user.profile_picture.url if obj.user.profile_picture else None
+            'profile_picture': obj.user.profile_picture.url if obj.user.profile_picture else settings.DEFAULT_AVATAR
         }
 
 
@@ -287,7 +295,7 @@ class NewDishSerializer(serializers.ModelSerializer):
         primary_image = obj.images.filter(is_primary=True).first()
         if primary_image and primary_image.image:
             return primary_image.image.url
-        return None
+        return settings.DEFAULT_DISH_IMAGE
 
 
 class HomePageSerializer(serializers.Serializer):

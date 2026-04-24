@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dotenv
+
+# Load environment variables from .env file
+dotenv.load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +53,8 @@ INSTALLED_APPS += [
     'authentication',
     'dishes',
     'orders',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -166,6 +172,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",  # Development server
     "http://127.0.0.1:8000",
     "http://10.0.2.2:8000",  # Angular default
+    "https://homemadefood.onrender.com",  
 ]
 
 # Allow credentials to be included in CORS requests
@@ -174,6 +181,14 @@ CORS_ALLOW_CREDENTIALS = True
 # Allow all headers by default for development
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only for development, set to False in production
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+DEFAULT_DISH_IMAGE = os.getenv('CLOUDINARY_DEFAULT_DISH')
+DEFAULT_AVATAR = os.getenv('CLOUDINARY_DEFAULT_PROFILE')
