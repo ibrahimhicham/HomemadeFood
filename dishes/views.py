@@ -13,6 +13,8 @@ from .serializers import (
     HomePageSerializer, CategoryHomeSerializer, FeaturedDishSerializer,
     TopChefSerializer, NewDishSerializer
 )
+import cloudinary.uploader
+from rest_framework.parsers import MultiPartParser, FormParser
 from .pagination import StandardResultsSetPagination
 from authentication.models import User, Chef
 
@@ -374,42 +376,53 @@ class DishVarietyOptionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyA
         )
 
 
+
 class DishImageCreateView(generics.CreateAPIView):
-    """Upload images for a dish (only dish creator can access)"""
     serializer_class = DishImageSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def perform_create(self, serializer):
         dish_id = self.kwargs['dish_id']
         dish = get_object_or_404(Dish, id=dish_id)
 
-        # Check if the authenticated user is the dish creator
-        if dish.chef != self.request.user:
+        # ✅ Correct ownership check
+        if dish.chef.user != self.request.user:
             raise permissions.PermissionDenied("Only the dish creator can add images.")
 
         serializer.save(dish=dish)
 
-
 class DishImageUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
-    """Get, update, or delete a specific dish image (only dish creator can modify)"""
     serializer_class = DishImageSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    parser_classes = [MultiPartParser, FormParser]
 
     def get_queryset(self):
         dish_id = self.kwargs['dish_id']
         image_id = self.kwargs['image_id']
+
         queryset = DishImage.objects.filter(dish_id=dish_id, id=image_id)
-        
-        # For write operations, ensure only dish creator can modify
+
+        # ✅ Restrict write operations to dish owner
         if self.request.method in ['PUT', 'PATCH', 'DELETE']:
-            queryset = queryset.filter(dish__chef=self.request.user)
-        
+            queryset = queryset.filter(dish__chef__user=self.request.user)
+
         return queryset
 
-    def get_serializer_context(self):
-        context = super().get_serializer_context()
-        context['request'] = self.request
-        return context
+    # ✅ Delete image from Cloudinary when deleting record
+    def perform_destroy(self, instance):
+        if instance.image:
+            cloudinary.uploader.destroy(instance.image.public_id)  # Delete image from Cloudinary
+
+    # ✅ Replace image safely (delete old one)
+    def perform_update(self, serializer):
+        instance = self.get_object()
+
+        if 'image' in self.request.FILES:
+            if instance.image:
+                instance.image.delete(save=False)
+
+        serializer.save()
 
 
 class HomePageView(APIView):

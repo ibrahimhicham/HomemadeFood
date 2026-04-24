@@ -9,6 +9,7 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
+    profile_picture = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -21,6 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_user_type(self, obj):
         return obj.get_user_type()
+    
+    def get_profile_picture(self, obj):
+        if obj.profile_picture:
+            return obj.profile_picture.url
+        return None
 
 
 class ChefSerializer(serializers.ModelSerializer):

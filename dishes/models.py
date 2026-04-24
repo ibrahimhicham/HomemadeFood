@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from authentication.models import User  # Using the existing User model
 from django.conf import settings
+from cloudinary.models import CloudinaryField  # For image handling (optional enhancement)
 
 
 class Category(models.Model):
@@ -60,7 +61,7 @@ class DishReview(models.Model):
 class DishImage(models.Model):
     """Image model for dishes (optional enhancement)"""
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='dishes/%Y/%m/%d/', default=settings.DEFAULT_DISH_IMAGE)
+    image = CloudinaryField('Dish Image', folder='dishes/', default=settings.DEFAULT_DISH_IMAGE)
     is_primary = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)

@@ -19,21 +19,46 @@ class CategorySerializer(serializers.ModelSerializer):
         return obj.dishes.count()
 
 
+from rest_framework import serializers
+from django.conf import settings
+from .models import DishImage
+
+
 class DishImageSerializer(serializers.ModelSerializer):
-    """Serializer for DishImage model"""
     image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = DishImage
-        fields = ['id', 'image_url', 'is_primary', 'created_at', 'updated_at']
+        fields = [
+            'id',
+            'image',          # required for upload
+            'image_url',      # returned to frontend
+            'is_primary',
+            'created_at',
+            'updated_at'
+        ]
         read_only_fields = ['id', 'created_at', 'updated_at']
-
-    
 
     def get_image_url(self, obj):
         if obj.image:
             return obj.image.url
         return settings.DEFAULT_DISH_IMAGE
+
+    # ✅ Ensure only one primary image per dish
+    def create(self, validated_data):
+        dish = validated_data['dish']
+
+        if validated_data.get('is_primary', False):
+            DishImage.objects.filter(dish=dish, is_primary=True).update(is_primary=False)
+
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        # Handle primary image switch
+        if validated_data.get('is_primary', False):
+            DishImage.objects.filter(dish=instance.dish, is_primary=True).exclude(id=instance.id).update(is_primary=False)
+
+        return super().update(instance, validated_data)
 
 
 class DishReviewSerializer(serializers.ModelSerializer):

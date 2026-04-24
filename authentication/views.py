@@ -16,9 +16,12 @@ from .serializers import (
 )
 from .models import PaymentCard, Chef, Consumer
 from .permissions import UserProfilePermission
+import cloudinary.uploader
+
 
 # Import pagination from dishes app
 from dishes.pagination import StandardResultsSetPagination
+from rest_framework.parsers import MultiPartParser, FormParser
 
 User = get_user_model()
 
@@ -239,33 +242,29 @@ class UserProfileView(APIView):
 
 
 class ProfilePictureUploadView(APIView):
-    """Upload profile picture for authenticated user"""
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request):
         user = request.user
-        if 'profile_picture' not in request.FILES:
+
+        file = request.FILES.get('profile_picture')
+        if not file:
             return Response(
                 {'detail': 'No image provided'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        user.profile_picture = request.FILES['profile_picture']
-        user.save()
-        serializer = UserSerializer(user, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def delete(self, request):
-        """Remove profile picture"""
-        user = request.user
         if user.profile_picture:
-            user.profile_picture.delete()
-            user.profile_picture = None
-            user.save()
+            cloudinary.uploader.destroy(user.profile_picture.public_id)  # Delete old image from Cloudinary
+
+        # Upload new image
+        user.profile_picture = file
+        user.save()
+
         return Response(
-            {'detail': 'Profile picture removed'},
+            UserSerializer(user, context={'request': request}).data,
             status=status.HTTP_200_OK
         )
-
 
 class ChefToggleOnlineView(APIView):
     """Toggle chef's online status (available to accept orders)"""

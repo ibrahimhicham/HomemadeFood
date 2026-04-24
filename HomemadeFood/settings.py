@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
 import dotenv
 
 # Load environment variables from .env file
@@ -192,3 +193,9 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 DEFAULT_DISH_IMAGE = os.getenv('CLOUDINARY_DEFAULT_DISH')
 DEFAULT_PROFILE_PICTURE = os.getenv('CLOUDINARY_DEFAULT_PROFILE')
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_SECRET_KEY'),
+    secure=True
+)
