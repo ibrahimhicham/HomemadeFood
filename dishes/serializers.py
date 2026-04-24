@@ -258,7 +258,8 @@ class FeaturedDishSerializer(DishListSerializer):
         return {
             'id': obj.chef.id,
             'first_name': obj.chef.first_name,
-            'last_name': obj.chef.last_name
+            'last_name': obj.chef.last_name,
+            'profile_picture': obj.chef.profile_picture.url if obj.chef.profile_picture else settings.DEFAULT_PROFILE_PICTURE
         }
 
 
