@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('refresh/', views.refresh_view, name='refresh'),
     # Homepage endpoint
     path('home/', views.HomePageView.as_view(), name='home-page'),
 

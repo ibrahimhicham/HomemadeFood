@@ -51,11 +51,11 @@ INSTALLED_APPS += [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'authentication',
-    'dishes',
+    'authentication',   
     'orders',
     'cloudinary',
     'cloudinary_storage',
+    'dishes.apps.DishesConfig',
 ]
 
 MIDDLEWARE = [

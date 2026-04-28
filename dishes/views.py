@@ -18,6 +18,10 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .pagination import StandardResultsSetPagination
 from authentication.models import User, Chef
 
+from django.http import JsonResponse
+
+def refresh_view(request):
+    return JsonResponse({"message": "Refreshed!"})
 
 class CategoryListView(generics.ListAPIView):
     """List all active categories"""
