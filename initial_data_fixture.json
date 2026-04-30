@@ -151,8 +151,8 @@
     "model": "dishes.category",
     "pk": 1,
     "fields": {
-      "name": "Italian",
-      "description": "Authentic Italian cuisine",
+      "name": "Soups",
+      "description": "Warm and comforting soups for all tastes",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -161,8 +161,8 @@
     "model": "dishes.category",
     "pk": 2,
     "fields": {
-      "name": "Mexican",
-      "description": "Traditional Mexican dishes",
+      "name": "Salads",
+      "description": "Fresh and healthy salads with a variety of ingredients",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -171,8 +171,8 @@
     "model": "dishes.category",
     "pk": 3,
     "fields": {
-      "name": "Asian",
-      "description": "Fusion Asian cuisine",
+      "name": "Sandwiches",
+      "description": "Quick and tasty sandwiches for any time of day",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -181,8 +181,88 @@
     "model": "dishes.category",
     "pk": 4,
     "fields": {
-      "name": "American",
-      "description": "Classic American comfort food",
+      "name": "Pasta",
+      "description": "Delicious pasta dishes with rich sauces and flavors",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 5,
+    "fields": {
+      "name": "Pizza",
+      "description": "Classic and modern pizzas with a variety of toppings",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 6,
+    "fields": {
+      "name": "Seafood",
+      "description": "Fresh seafood dishes prepared with rich flavors",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 7,
+    "fields": {
+      "name": "Meat Dishes",
+      "description": "Hearty meat dishes cooked with spices and sauces",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 8,
+    "fields": {
+      "name": "Chicken Dishes",
+      "description": "Tasty chicken meals with different cooking styles",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 9,
+    "fields": {
+      "name": "Baked Goods",
+      "description": "Freshly baked breads, pastries, and savory treats",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 10,
+    "fields": {
+      "name": "Desserts",
+      "description": "Sweet desserts to satisfy every craving",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 11,
+    "fields": {
+      "name": "Drinks",
+      "description": "Refreshing beverages, hot and cold",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 12,
+    "fields": {
+      "name": "Others",
+      "description": "Miscellaneous dishes that don't fit other categories",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -194,7 +274,7 @@
       "chef": 1,
       "name": "Spaghetti Carbonara",
       "description": "Classic Roman pasta with eggs, cheese, pancetta and pepper",
-      "category": 1,
+      "category": 4,
       "price": "15.99",
       "is_available": true,
       "preparation_time": 20,
@@ -209,7 +289,7 @@
       "chef": 1,
       "name": "Margherita Pizza",
       "description": "Traditional Neapolitan pizza with tomato, mozzarella and basil",
-      "category": 1,
+      "category": 5,
       "price": "18.50",
       "is_available": true,
       "preparation_time": 25,
@@ -224,7 +304,7 @@
       "chef": 2,
       "name": "Chicken Tacos",
       "description": "Soft corn tortillas filled with seasoned chicken, cilantro and onion",
-      "category": 2,
+      "category": 8,
       "price": "12.99",
       "is_available": true,
       "preparation_time": 15,
@@ -239,7 +319,7 @@
       "chef": 2,
       "name": "Beef Burrito",
       "description": "Large flour tortilla with seasoned beef, rice, beans, cheese and salsa",
-      "category": 2,
+      "category": 7,
       "price": "14.99",
       "is_available": true,
       "preparation_time": 20,
@@ -255,7 +335,7 @@
       "is_primary": true,
       "created_at": "2023-02-01T12:00:00Z",
       "updated_at": "2023-02-01T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584563/WhatsApp_Image_2026-05-01_at_12.16.09_AM_zj9i4m.jpg"
     }
   },
   {
@@ -266,7 +346,7 @@
       "is_primary": true,
       "created_at": "2023-02-01T12:00:00Z",
       "updated_at": "2023-02-01T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583800/WhatsApp_Image_2026-05-01_at_12.11.46_AM_rsa4cp.jpg"
     }
   },
   {
@@ -277,7 +357,7 @@
       "is_primary": true,
       "created_at": "2023-02-15T12:00:00Z",
       "updated_at": "2023-02-15T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582903/WhatsApp_Image_2026-04-30_at_11.58.40_PM_me83bd.jpg"
     }
   },
   {
@@ -288,7 +368,7 @@
       "is_primary": true,
       "created_at": "2023-02-15T12:00:00Z",
       "updated_at": "2023-02-15T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582222/WhatsApp_Image_2026-04-30_at_11.49.37_PM_krehgb.jpg"
     }
   },
   {
@@ -631,7 +711,7 @@
       "chef": 1,
       "name": "Risotto ai Funghi",
       "description": "Creamy Italian risotto with porcini mushrooms and parmesan",
-      "category": 1,
+      "category": 4,
       "price": "19.99",
       "is_available": true,
       "preparation_time": 35,
@@ -644,7 +724,7 @@
     "pk": 5,
     "fields": {
       "dish": 5,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584492/WhatsApp_Image_2026-05-01_at_12.15.27_AM_ufwyjd.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -657,7 +737,7 @@
       "chef": 1,
       "name": "Tiramisu",
       "description": "Classic Italian dessert with espresso-soaked ladyfingers and mascarpone",
-      "category": 1,
+      "category": 10,
       "price": "9.99",
       "is_available": true,
       "preparation_time": 15,
@@ -670,7 +750,7 @@
     "pk": 6,
     "fields": {
       "dish": 6,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584887/WhatsApp_Image_2026-05-01_at_12.19.11_AM_q4bblh.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -683,7 +763,7 @@
       "chef": 1,
       "name": "Italian Burger",
       "description": "Beef burger with mozzarella, tomato, basil pesto on ciabatta",
-      "category": 4,
+      "category": 3,
       "price": "16.99",
       "is_available": true,
       "preparation_time": 20,
@@ -696,7 +776,7 @@
     "pk": 7,
     "fields": {
       "dish": 7,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583606/WhatsApp_Image_2026-05-01_at_12.06.50_AM_fnxzd2.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -709,7 +789,7 @@
       "chef": 2,
       "name": "Enchiladas Verdes",
       "description": "Corn tortillas filled with chicken, covered in green tomatillo salsa",
-      "category": 2,
+      "category": 8,
       "price": "13.99",
       "is_available": true,
       "preparation_time": 25,
@@ -722,7 +802,7 @@
     "pk": 8,
     "fields": {
       "dish": 8,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583405/WhatsApp_Image_2026-05-01_at_12.04.48_AM_a7gyyg.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -735,7 +815,7 @@
       "chef": 2,
       "name": "Churros",
       "description": "Fried dough pastry with cinnamon sugar and chocolate dipping sauce",
-      "category": 2,
+      "category": 10,
       "price": "7.99",
       "is_available": true,
       "preparation_time": 20,
@@ -748,7 +828,7 @@
     "pk": 9,
     "fields": {
       "dish": 9,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583205/WhatsApp_Image_2026-05-01_at_12.01.23_AM_mt9pmj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -761,7 +841,7 @@
       "chef": 2,
       "name": "Mexican Bowl",
       "description": "Rice bowl with black beans, corn, guacamole, and chipotle sauce",
-      "category": 4,
+      "category": 12,
       "price": "11.99",
       "is_available": true,
       "preparation_time": 15,
@@ -774,7 +854,7 @@
     "pk": 10,
     "fields": {
       "dish": 10,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584257/WhatsApp_Image_2026-05-01_at_12.13.27_AM_nh91lj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -787,7 +867,7 @@
       "chef": 3,
       "name": "Bouillabaisse",
       "description": "Traditional French Proven\u00e7al fish stew with saffron and rouille",
-      "category": 1,
+      "category": 4,
       "price": "24.99",
       "is_available": true,
       "preparation_time": 45,
@@ -800,7 +880,7 @@
     "pk": 11,
     "fields": {
       "dish": 11,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582356/WhatsApp_Image_2026-04-30_at_11.51.17_PM_emu6zk.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -813,7 +893,7 @@
       "chef": 3,
       "name": "Mediterranean Platter",
       "description": "Hummus, falafel, tabbouleh, olives, and pita bread",
-      "category": 3,
+      "category": 12,
       "price": "15.99",
       "is_available": true,
       "preparation_time": 20,
@@ -826,7 +906,7 @@
     "pk": 12,
     "fields": {
       "dish": 12,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584107/WhatsApp_Image_2026-05-01_at_12.12.40_AM_giiow8.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -839,7 +919,7 @@
       "chef": 3,
       "name": "Coq au Vin",
       "description": "French braised chicken in red wine with mushrooms and pearl onions",
-      "category": 1,
+      "category": 4,
       "price": "21.99",
       "is_available": true,
       "preparation_time": 40,
@@ -852,7 +932,7 @@
     "pk": 13,
     "fields": {
       "dish": 13,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583277/WhatsApp_Image_2026-05-01_at_12.02.14_AM_tpjcja.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -865,7 +945,7 @@
       "chef": 4,
       "name": "Sushi Omakase",
       "description": "Chef selection of 12 pieces of premium nigiri sushi",
-      "category": 3,
+      "category": 6,
       "price": "35.99",
       "is_available": true,
       "preparation_time": 30,
@@ -878,7 +958,7 @@
     "pk": 14,
     "fields": {
       "dish": 14,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584713/WhatsApp_Image_2026-05-01_at_12.17.15_AM_synvds.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -889,9 +969,9 @@
     "pk": 15,
     "fields": {
       "chef": 4,
-      "name": "Ramen Tonkotsu",
-      "description": "Rich pork bone broth with chashu, soft egg, and green onions",
-      "category": 3,
+      "name": "Japanese Green Tea",
+      "description": "Traditional green tea with a light, refreshing flavor",
+      "category": 11,
       "price": "16.99",
       "is_available": true,
       "preparation_time": 25,
@@ -904,7 +984,7 @@
     "pk": 15,
     "fields": {
       "dish": 15,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583664/WhatsApp_Image_2026-05-01_at_12.08.08_AM_ujl86r.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -917,7 +997,7 @@
       "chef": 4,
       "name": "Tempura Moriawase",
       "description": "Assorted seafood and vegetable tempura with tentsuyu sauce",
-      "category": 3,
+      "category": 6,
       "price": "18.99",
       "is_available": true,
       "preparation_time": 20,
@@ -930,7 +1010,7 @@
     "pk": 16,
     "fields": {
       "dish": 16,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584805/WhatsApp_Image_2026-05-01_at_12.17.58_AM_jh3na1.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -943,7 +1023,7 @@
       "chef": 5,
       "name": "Butter Chicken",
       "description": "Tender chicken in creamy tomato sauce with fenugreek and butter",
-      "category": 3,
+      "category": 8,
       "price": "14.99",
       "is_available": true,
       "preparation_time": 30,
@@ -956,7 +1036,7 @@
     "pk": 17,
     "fields": {
       "dish": 17,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582512/WhatsApp_Image_2026-04-30_at_11.53.38_PM_orkxul.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -969,7 +1049,7 @@
       "chef": 5,
       "name": "Vegetable Biryani",
       "description": "Fragrant basmati rice with mixed vegetables and aromatic spices",
-      "category": 3,
+      "category": 12,
       "price": "12.99",
       "is_available": true,
       "preparation_time": 35,
@@ -982,7 +1062,7 @@
     "pk": 18,
     "fields": {
       "dish": 18,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584983/WhatsApp_Image_2026-05-01_at_12.20.20_AM_c4hvaj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -993,9 +1073,9 @@
     "pk": 19,
     "fields": {
       "chef": 5,
-      "name": "Garlic Naan",
-      "description": "Traditional Indian flatbread with garlic and butter",
-      "category": 3,
+      "name": "Caesar Salad",
+      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and Parmesan cheese",
+      "category": 2,
       "price": "4.99",
       "is_available": true,
       "preparation_time": 10,
@@ -1008,7 +1088,7 @@
     "pk": 19,
     "fields": {
       "dish": 19,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582632/WhatsApp_Image_2026-04-30_at_11.54.46_PM_tjf6aa.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1021,7 +1101,7 @@
       "chef": 6,
       "name": "Lamb Shawarma",
       "description": "Slow-roasted lamb with garlic sauce, pickles, and vegetables",
-      "category": 1,
+      "category": 3,
       "price": "15.99",
       "is_available": true,
       "preparation_time": 25,
@@ -1034,7 +1114,7 @@
     "pk": 20,
     "fields": {
       "dish": 20,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583745/WhatsApp_Image_2026-05-01_at_12.10.38_AM_dbleil.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1060,7 +1140,7 @@
     "pk": 21,
     "fields": {
       "dish": 21,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583501/WhatsApp_Image_2026-05-01_at_12.05.51_AM_udeujp.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1073,7 +1153,7 @@
       "chef": 6,
       "name": "Mixed Grill",
       "description": "Combination of kebabs, kofta, and chicken with rice and salad",
-      "category": 1,
+      "category": 7,
       "price": "22.99",
       "is_available": true,
       "preparation_time": 30,
@@ -1086,7 +1166,7 @@
     "pk": 22,
     "fields": {
       "dish": 22,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584346/WhatsApp_Image_2026-05-01_at_12.14.29_AM_y1fqhc.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1099,7 +1179,7 @@
       "chef": 7,
       "name": "Chicken Paprikash",
       "description": "Hungarian chicken stew with paprika, sour cream, and dumplings",
-      "category": 4,
+      "category": 8,
       "price": "14.99",
       "is_available": true,
       "preparation_time": 35,
@@ -1112,7 +1192,7 @@
     "pk": 23,
     "fields": {
       "dish": 23,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582794/WhatsApp_Image_2026-04-30_at_11.56.34_PM_gz5ekb.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1123,9 +1203,9 @@
     "pk": 24,
     "fields": {
       "chef": 7,
-      "name": "Sarmale",
-      "description": "Romanian cabbage rolls stuffed with seasoned pork and rice",
-      "category": 4,
+      "name": "Chocolate Croissant",
+      "description": "Flaky buttery pastry filled with rich melted chocolate",
+      "category": 9,
       "price": "13.99",
       "is_available": true,
       "preparation_time": 40,
@@ -1138,7 +1218,7 @@
     "pk": 24,
     "fields": {
       "dish": 24,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583117/WhatsApp_Image_2026-04-30_at_11.59.56_PM_pji85h.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1151,7 +1231,7 @@
       "chef": 7,
       "name": "Apple Strudel",
       "description": "Flaky pastry filled with spiced apples, raisins, and cinnamon",
-      "category": 4,
+      "category": 10,
       "price": "6.99",
       "is_available": true,
       "preparation_time": 25,
@@ -1164,7 +1244,7 @@
     "pk": 25,
     "fields": {
       "dish": 25,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582105/WhatsApp_Image_2026-04-30_at_11.46.58_PM_o2azh8.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"

@@ -10,9 +10,8 @@ from .serializers import (
     CategorySerializer, DishSerializer, DishListSerializer,
     DishReviewSerializer, DishImageSerializer,
     DishVarietySectionSerializer, DishVarietyOptionSerializer,
-    HomePageSerializer, CategoryHomeSerializer, FeaturedDishSerializer,
-    TopChefSerializer, NewDishSerializer
-)
+    HomePageSerializer)
+from django.db.models import Avg, Count
 import cloudinary.uploader
 from rest_framework.parsers import MultiPartParser, FormParser
 from .pagination import StandardResultsSetPagination
@@ -211,18 +210,6 @@ class DishVarietyOptionDeleteView(generics.DestroyAPIView):
         return DishVarietyOption.objects.filter(section__dish__chef=self.request.user)
 
 
-class ChefCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """Get, update, or delete a specific category for the authenticated chef"""
-    serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        # Only allow access to categories that have dishes created by this chef
-        return Category.objects.filter(
-            dishes__chef=self.request.user
-        ).distinct()
-
-
 class ChefDishListView(generics.ListCreateAPIView):
     """List and create dishes for the authenticated chef"""
     serializer_class = DishListSerializer
@@ -276,14 +263,41 @@ class ReviewListCreateView(generics.ListCreateAPIView):
         dish_id = self.kwargs['dish_id']
         return DishReview.objects.filter(dish_id=dish_id).select_related('customer').order_by('-created_at')
 
+
     def perform_create(self, serializer):
-        dish_id = self.kwargs['dish_id']  # Matches the URL parameter name
+        dish_id = self.kwargs['dish_id']
         dish = get_object_or_404(Dish, id=dish_id)
 
-        # Check if the user is a customer
         user_type = self.request.user.get_user_type()
         if user_type != 'consumer':
             raise permissions.PermissionDenied("Only customers can submit reviews")
+
+        existing_review = DishReview.objects.filter(
+            dish=dish,
+            customer=self.request.user
+        ).first()
+
+        if existing_review:
+            raise permissions.PermissionDenied("You have already reviewed this dish")
+
+        # ✅ Save review first
+        review = serializer.save(dish=dish, customer=self.request.user)
+
+        # ✅ Get the chef
+        chef = dish.chef
+
+        # ✅ Aggregate ALL reviews for this chef's dishes
+        stats = DishReview.objects.filter(
+            dish__chef=chef
+        ).aggregate(
+            avg_rating=Avg('rating'),
+            total_reviews=Count('id')
+        )
+
+        # ✅ Update chef
+        chef.rating = stats['avg_rating'] or 0
+        chef.total_reviews = stats['total_reviews']
+        chef.save(update_fields=['rating', 'total_reviews'])
 
         # Check if the user has already reviewed this dish
         existing_review = DishReview.objects.filter(
