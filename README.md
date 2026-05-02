@@ -1,8 +1,22 @@
-# Homemade Food Application
+# 🍲 Homemade Food Platform
+
 
 ## Project Overview
 
-The Homemade Food Authentication Service is a Django-based authentication microservice designed for a food delivery platform. The service manages user registration, login/logout, password reset functionality, and user profile management for both chefs and consumers.
+The Homemade Food is a backend system built with Django and Django REST Framework designed for a food delivery platform. Backend manages user registration, login/logout, password reset functionality, and user profile management for both chefs and consumers and enabling users to browse dishes, place orders, and manage food-related interactions in a scalable monolithic-style architecture..
+
+The system supports two main user roles:
+
+👨‍🍳 Chefs — create and manage dishes, accepts/refuses orders
+🧑‍🍽️ Consumers — browse dishes, place orders, and leave reviews
+
+# Tech Stack
+- Backend: Django 5.x
+- API Framework: Django REST Framework
+- Database: SQLite (dev) → PostgreSQL/MySQL (production-ready)
+- Authentication: Custom User Model + Token-based auth
+- CORS: Enabled for frontend/mobile integration
+- Architecture: Modular Django apps (microservice-ready design)
 
 ### Key Features
 - Custom User model with email-based authentication
@@ -23,6 +37,29 @@ The Homemade Food Authentication Service is a Django-based authentication micros
 3. **dishes** - App for managing dishes, categories, and reviews
 4. **orders** - Planned module for handling food orders (implementation planned)
 
+### Structure
+ ``` 
+  HomemadeFood/
+  │── settings.py
+  │── urls.py
+  │
+  authentication/
+  │── User management (Chef / Consumer)
+  │── Auth (login, signup, reset password)
+  │── Payment cards
+  │
+  dishes/
+  │── Categories
+  │── Dishes
+  │── Reviews
+  │── Dish images
+  │── Dish varieties (options & pricing)
+  │
+  orders/
+  │── Order creation & management
+  │── Order items
+  │── Order tracking
+```
 ### Core Models
 - `User` - Custom user model using email as the username field
 - `Chef` - Chef-specific profile with ratings, specialties, and experience
@@ -31,9 +68,50 @@ The Homemade Food Authentication Service is a Django-based authentication micros
 - `Category` - Categories for organizing dishes
 - `Dish` - Menu items created by chefs
 - `DishReview` - Reviews and ratings for dishes
+- `DishVarietySection` - chef creates and consumer selects a topping section 
+- `DishVarietyOption` - Dish varieties (size, toppings, extras with price adjustments)
 - `DishImage` - Images for dishes
 - `Order` - (Planned) Food orders placed by consumers
 - `OrderItem` - (Planned) Individual items within an order
+
+## 🧠 Core Features (Completed Modules)
+
+### 🔐 Authentication System
+- Custom email-based user model
+- JWT-style token authentication
+- Signup / Login / Logout
+- Password reset flow
+- Profile management (Chef / Consumer)
+- Payment card management
+- Role-based access control
+
+### 🍽️ Dishes System
+- Create and manage dishes (chef-only)
+- Categories for organization
+- Dish images support
+- Reviews & rating system
+- Dish varieties (size, toppings, extras with price adjustments)
+- Chef-specific dish listing
+
+### 📦 Orders System
+- Create orders from dishes
+- Multiple order items support
+- Order tracking
+- Relationship between users, dishes, and payments
+
+##🧾 Data Models (High Level)
+- User
+`Chef profile`
+`Consumer profile`
+`Payment cards`
+- Category
+- Dish
+`Images`
+`Reviews`
+`Varieties (sections + options)`
+- Order
+`Order items`
+`Linked to user + dishes`
 
 ## Building and Running
 
@@ -129,7 +207,7 @@ All authentication endpoints are accessible under the `/api/auth/` base path:
   - Both chefs and consumers can update their own profiles
   - Requires authentication as the user whose profile is being updated
 
-### Dishes Endpoints
+### 🍽️ Dishes Endpoints
 Dishes endpoints are accessible under the `/api/dishes/` base path:
 - `GET /api/dishes/` - List all available dishes
 - `POST /api/dishes/` - Create a new dish (chef only)
@@ -138,6 +216,18 @@ Dishes endpoints are accessible under the `/api/dishes/` base path:
 - `DELETE /api/dishes/<id>/` - Delete a dish (owner only)
 - `GET /api/dishes/categories/` - List all dish categories
 - `POST /api/dishes/reviews/` - Add a review for a dish
+
+### 📦 Orders Endpoints
+- `GET / → List` orders
+- `POST /create/` → Create order
+- `GET /<order_id>/` → Order details
+
+## Development Standards
+- PEP8 compliance
+- DRF serializers for validation
+- Service-based architecture inside apps
+- Role-based permissions (Chef / Consumer separation)
+- Clean separation between business logic and API layer
 
 ## Admin Interface
 Access the Django admin interface at `/admin/` to manage users, chefs, consumers, dishes, categories, reviews, and payment cards.

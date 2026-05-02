@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Category, Dish, DishReview, DishImage, DishVarietySection, DishVarietyOption
 from authentication.models import User, Chef
 from authentication.serializers import UserSerializer
+from django.db import transaction
 from django.conf import settings
 
 
@@ -142,7 +143,7 @@ class DishVarietyOptionSerializer(serializers.ModelSerializer):
 
 class DishVarietySectionSerializer(serializers.ModelSerializer):
     """Serializer for DishVarietySection model"""
-    options = DishVarietyOptionSerializer(many=True, read_only=True)
+    options = DishVarietyOptionSerializer(many=True)
 
     class Meta:
         model = DishVarietySection
@@ -215,7 +216,7 @@ class DishSerializer(serializers.ModelSerializer):
     )
     images = DishImageSerializer(many=True, read_only=True)
     reviews_preview = serializers.SerializerMethodField()
-    variety_sections = DishVarietySectionSerializer(many=True, read_only=True)
+    variety_sections = DishVarietySectionSerializer(many=True, required=False)
     rating_avg = serializers.SerializerMethodField()
     reviews_count = serializers.SerializerMethodField()
 
@@ -252,10 +253,76 @@ class DishSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create a new dish with the authenticated chef"""
         request = self.context.get('request')
+        name = validated_data.get('name')
+        sections_data = validated_data.pop('variety_sections', [])
         if request and hasattr(request, 'user'):
             validated_data['chef'] = request.user
-        return super().create(validated_data)
 
+        if Dish.objects.filter(chef=validated_data['chef'], name=name).exists():
+            raise serializers.ValidationError({
+                "name": "You already have a dish with this name."
+            })    
+        dish = Dish.objects.create(**validated_data)
+
+    # ✅ create sections + options
+        for section_data in sections_data:
+            options_data = section_data.pop('options', [])
+
+            section = DishVarietySection.objects.create(
+                dish=dish,
+                **section_data
+            )
+
+            for option_data in options_data:
+                DishVarietyOption.objects.create(
+                    section=section,
+                    **option_data
+                )
+
+        return dish
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        sections_data = validated_data.pop('variety_sections', None)
+
+        # 🔴 handle name uniqueness on update
+        name = validated_data.get('name', instance.name)
+        chef = self.context['request'].user
+
+        if Dish.objects.filter(
+            chef=chef,
+            name__iexact=name
+        ).exclude(id=instance.id).exists():
+            raise serializers.ValidationError({
+                "name": "You already have a dish with this name."
+            })
+
+        # ✅ update basic fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # delete old
+        instance.variety_sections.all().delete()
+
+        # ✅ update nested (ONLY if provided in PATCH)
+        if sections_data is not None:
+
+            # recreate
+            for section_data in sections_data:
+                options_data = section_data.pop('options', [])
+
+                section = DishVarietySection.objects.create(
+                    dish=instance,
+                    **section_data
+                )
+
+                for option_data in options_data:
+                    DishVarietyOption.objects.create(
+                        section=section,
+                        **option_data
+                    )
+
+        return instance
 
 # Homepage Serializers
 
