@@ -405,7 +405,7 @@ class DishImageCreateView(generics.CreateAPIView):
         dish = get_object_or_404(Dish, id=dish_id)
 
         # ✅ Correct ownership check
-        if dish.chef.user != self.request.user:
+        if dish.chef != self.request.user:
             raise permissions.PermissionDenied("Only the dish creator can add images.")
 
         serializer.save(dish=dish)

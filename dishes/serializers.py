@@ -214,7 +214,7 @@ class DishSerializer(serializers.ModelSerializer):
         write_only=True,
         source='category'
     )
-    images = DishImageSerializer(many=True, read_only=True)
+    images = serializers.SerializerMethodField()
     reviews_preview = serializers.SerializerMethodField()
     variety_sections = DishVarietySectionSerializer(many=True, required=False)
     rating_avg = serializers.SerializerMethodField()
@@ -249,7 +249,21 @@ class DishSerializer(serializers.ModelSerializer):
         else:
             reviews = obj.reviews.select_related('customer').order_by('-created_at')[:3]
         return DishReviewPreviewSerializer(reviews, many=True).data
+    
+    def get_images(self, obj):
+        images = obj.images.all()
 
+        if images.exists():
+            return DishImageSerializer(images, many=True).data
+
+        return [{
+            'id': None,
+            'image': settings.DEFAULT_DISH_IMAGE,
+            'image_url': settings.DEFAULT_DISH_IMAGE,
+            'is_primary': True,
+            'created_at': None,
+            'updated_at': None
+        }]
     def create(self, validated_data):
         """Create a new dish with the authenticated chef"""
         request = self.context.get('request')
