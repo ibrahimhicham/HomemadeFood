@@ -59,6 +59,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         elif hasattr(self, 'consumer'):
             return 'consumer'
         return None
+    
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}".strip()
 
 
 class Chef(models.Model):

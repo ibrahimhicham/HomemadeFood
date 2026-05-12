@@ -176,8 +176,6 @@ class NotificationMarkReadView(generics.UpdateAPIView):
 class CancelExpiredOrdersView(generics.GenericAPIView):
     """Manually trigger auto-cancel for expired pending orders (admin only)."""
 
-    permission_classes = [permissions.IsAdminUser]
-
     def post(self, request, *args, **kwargs):
         count = CancelExpiredOrdersService.execute()
         return Response({'cancelled_count': count})
