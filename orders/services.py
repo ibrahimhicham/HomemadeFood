@@ -18,9 +18,8 @@ from .constants import (
     DELIVERY_FEE,
 )
 from .utils import (
-    broadcast_notification,
-    broadcast_order_status_update,
-    broadcast_new_order_to_chef,
+    send_to_user_group,
+    send_to_order_group,
 )
 from dishes.models import Dish, DishVarietyOption
 
@@ -175,17 +174,18 @@ class OrderCreateService:
         )
 
         # Broadcast WebSocket event to chef
-        broadcast_new_order_to_chef(
-            chef_id=self.chef_id,
-            order_data={
-                'order_id': str(order.order_id),
-                'customer_name': f'{self.customer.first_name} {self.customer.last_name}',
-                'total_amount': str(order.total_amount),
-                'items_count': len(self.items),
-                'message': f'New order from {self.customer.first_name} {self.customer.last_name}',
-                'created_at': timezone.now().isoformat(),
-            },
-        )
+        send_to_user_group(
+        user_id=self.chef_id,
+        event_type='order_created',
+        data={
+            'order_id': str(order.order_id),
+            'customer_name': f'{self.customer.first_name} {self.customer.last_name}',
+            'total_amount': str(order.total_amount),
+            'items_count': len(self.items),
+            'message': f'New order from {self.customer.first_name} {self.customer.last_name}',
+            'created_at': timezone.now().isoformat(),
+        },
+    )
 
         return order
 
@@ -295,9 +295,10 @@ class OrderStatusService:
             )
 
             # Broadcast WebSocket notification to recipient
-            broadcast_notification(
+            send_to_user_group(
                 user_id=recipient.id,
-                notification_data={
+                event_type='order_notification',
+                data={
                     'notification_type': n_type,
                     'order_id': str(self.order.order_id),
                     'message': message,
@@ -306,9 +307,10 @@ class OrderStatusService:
             )
 
             # Broadcast status update to order-specific group
-            broadcast_order_status_update(
+            send_to_order_group(
                 order_id=str(self.order.order_id),
-                status_data={
+                event_type='order_status_update',
+                data={
                     'order_id': str(self.order.order_id),
                     'status': self.new_status,
                     'updated_at': timezone.now().isoformat(),
@@ -353,21 +355,51 @@ class CancelExpiredOrdersService:
                     f"the chef did not respond within 5 minutes."
                 ),
             )
-
-            # Broadcast WebSocket notification
-            broadcast_notification(
-                user_id=order.customer.id,
-                notification_data={
-                    'notification_type': NotificationType.ORDER_CANCELLED,
-                    'order_id': str(order.order_id),
-                    'message': (
-                        f"Order #{order.order_id} was auto-cancelled because "
-                        f"the chef did not respond within 5 minutes."
-                    ),
-                    'created_at': timezone.now().isoformat(),
-                },
+            OrderNotification.objects.create(
+                order=order,
+                recipient=order.chef,
+                notification_type=NotificationType.ORDER_CANCELLED,
+                message=(
+                    f"Order #{order.order_id} was auto-cancelled because "
+                    f"the chef did not respond within 5 minutes."
+                ),
             )
 
+            # Broadcast WebSocket notification
+            customer_name = (
+                f"{order.customer.first_name} {order.customer.last_name}".strip()
+                or order.customer.email
+            )
+            
+            cancellation_data = {
+                'order_id': str(order.order_id),
+                'customer_name': customer_name,
+                'total_amount': str(order.total_amount),
+                'items_count': order.items.count(),
+                'message': 'order is auto canceled',
+                'created_at': timezone.now().isoformat(),
+            }
+            
+            # Send to chef directly
+            send_to_user_group(
+                user_id=order.chef.id,
+                event_type='order_canceled',
+                data=cancellation_data,
+            )
+            
+            # Send to customer directly
+            send_to_user_group(
+                user_id=order.customer.id,
+                event_type='order_canceled',
+                data=cancellation_data,
+            )
+            
+            # Send to live order subscribers
+            send_to_order_group(
+                order_id=str(order.order_id),
+                event_type='order_canceled',
+                data=cancellation_data,
+            )
             count += 1
 
         return count

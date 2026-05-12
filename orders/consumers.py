@@ -57,18 +57,24 @@ class OrderConsumer(AsyncJsonWebsocketConsumer):
 
     async def order_notification(self, event):
         await self.send_json({
-            'type': 'notification',
+            'type': 'order_notification',
             'data': event['data'],
         })
 
     async def order_status_update(self, event):
         await self.send_json({
-            'type': 'status_update',
+            'type': 'order_status_update',
             'data': event['data'],
         })
 
     async def order_created(self, event):
         await self.send_json({
             'type': 'new_order',
+            'data': event['data'],
+        })
+
+    async def order_canceled(self, event):
+        await self.send_json({
+            'type': 'order_canceled',
             'data': event['data'],
         })
