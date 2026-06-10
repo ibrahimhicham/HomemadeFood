@@ -13,6 +13,7 @@ from .serializers import (
     OrderUpdateSerializer,
     OrderStatusUpdateSerializer,
     OrderNotificationSerializer,
+    OrderFilterSerializer,
 )
 from .services import OrderCreateService, OrderStatusService, CancelExpiredOrdersService
 from .constants import OrderStatus
@@ -76,12 +77,22 @@ class OrderListView(generics.ListAPIView):
         user = self.request.user
 
         if hasattr(user, 'consumer'):
-            return Order.objects.filter(customer=user)
+            queryset = Order.objects.filter(customer=user)
         elif hasattr(user, 'chef'):
-            return Order.objects.filter(chef=user)
+            queryset = Order.objects.filter(chef=user)
+        
+        filter_serializer = OrderFilterSerializer(
+            data=self.request.query_params
+        )
 
-        return Order.objects.none()
+        filter_serializer.is_valid(raise_exception=True)
 
+        status_value = filter_serializer.validated_data.get("status")
+
+        if status_value:
+            queryset = queryset.filter(status=status_value)
+
+        return queryset
 
 class OrderDetailView(generics.RetrieveAPIView):
     """Get order details (consumer or chef)."""

@@ -45,8 +45,8 @@ class Order(models.Model):
 
     # Delivery details
     delivery_address = models.TextField()
-    delivery_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    delivery_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    delivery_longitude = models.DecimalField(max_digits=15, decimal_places=11, null=True, blank=True)
+    delivery_latitude = models.DecimalField(max_digits=15, decimal_places=11, null=True, blank=True)
     estimated_delivery_time = models.DateTimeField(null=True, blank=True)
 
     # Metadata

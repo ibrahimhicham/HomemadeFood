@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Order, OrderItem, OrderItemVarietySelection, OrderNotification
+from .models import Order, OrderItem, OrderItemVarietySelection, OrderNotification, OrderStatus
 from authentication.models import User
 from dishes.models import Dish
 
@@ -71,7 +71,12 @@ class OrderCreateSerializer(serializers.Serializer):
             raise serializers.ValidationError("At least one item is required.")
         return value
 
-
+# serializers.py
+class OrderFilterSerializer(serializers.Serializer):
+    status = serializers.ChoiceField(
+        choices=OrderStatus.choices,
+        required=False
+    )
 class OrderListSerializer(serializers.ModelSerializer):
     """Serializer for order list view."""
 
@@ -79,7 +84,7 @@ class OrderListSerializer(serializers.ModelSerializer):
     chef_name = serializers.CharField(source='chef_name_snapshot')
     items_count = serializers.SerializerMethodField()
     estimated_ready_time = serializers.DateTimeField(read_only=True)
-
+    
     class Meta:
         model = Order
         fields = [

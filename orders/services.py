@@ -107,7 +107,7 @@ class OrderCreateService:
 
         dishes = Dish.objects.filter(
             id__in=[i['dish_id'] for i in self.items]
-        ).select_related('chef')
+        ).select_related('chef')                    
         chef = dishes[0].chef
         chef_name = f"{chef.first_name} {chef.last_name}".strip() or chef.email
 
@@ -334,6 +334,10 @@ class CancelExpiredOrdersService:
             status=OrderStatus.PENDING,
             created_at__lte=cutoff,
         )
+        delivery_orders = Order.objects.filter(
+            status=OrderStatus.OUT_FOR_DELIVERY,
+            created_at__lte=cutoff,
+        )
 
         count = 0
         for order in expired_orders:
@@ -399,6 +403,56 @@ class CancelExpiredOrdersService:
                 order_id=str(order.order_id),
                 event_type='order_canceled',
                 data=cancellation_data,
+            )
+            count += 1
+        for order in delivery_orders:
+            order.status = OrderStatus.OUT_FOR_DELIVERY
+            order.delivered_at = timezone.now()
+            order.save(update_fields=['status', 'delivered_at'])
+            OrderNotification.objects.create(
+                order=order,
+                recipient=order.customer,
+                notification_type=NotificationType.DELIVERED,
+                message=(
+                    f"Order #{order.order_id} has been marked as delivered. "
+                    f"If you haven't received it, please contact support."
+                ),
+            )
+            OrderNotification.objects.create(
+                order=order,
+                recipient=order.chef,
+                notification_type=NotificationType.DELIVERED,
+                message=(
+                    f"Order #{order.order_id} has been marked as delivered. "
+                    f"If the customer hasn't received it, please contact support."
+                ),
+            )
+            customer_name = (
+                f"{order.customer.first_name} {order.customer.last_name}".strip()
+                or order.customer.email
+            )
+            delivery_data = {
+                'order_id': str(order.order_id),
+                'customer_name': customer_name,
+                'total_amount': str(order.total_amount),
+                'items_count': order.items.count(),
+                'message': 'order is marked as delivered',
+                'created_at': timezone.now().isoformat(),
+            }
+            send_to_user_group(
+                user_id=order.chef.id,
+                event_type='order_delivered',
+                data=delivery_data,
+            )
+            send_to_user_group(
+                user_id=order.customer.id,
+                event_type='order_delivered',
+                data=delivery_data,
+            )
+            send_to_order_group(
+                order_id=str(order.order_id),
+                event_type='order_delivered',
+                data=delivery_data,
             )
             count += 1
 
