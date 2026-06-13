@@ -56,10 +56,10 @@ class OrderCreateSerializer(serializers.Serializer):
     chef_id = serializers.IntegerField()
     delivery_address = serializers.CharField()
     delivery_longitude = serializers.DecimalField(
-        max_digits=9, decimal_places=6, required=False, allow_null=True
+        max_digits=15, decimal_places=11, required=False, allow_null=True
     )
     delivery_latitude = serializers.DecimalField(
-        max_digits=9, decimal_places=6, required=False, allow_null=True
+        max_digits=15, decimal_places=11, required=False, allow_null=True
     )
     special_instructions = serializers.CharField(
         required=False, allow_blank=True, allow_null=True
