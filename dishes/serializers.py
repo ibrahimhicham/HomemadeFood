@@ -68,7 +68,7 @@ class DishReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DishReview
-        fields = ['id', 'dish', 'customer', 'rating', 'review_text', 'created_at', 'updated_at']
+        fields = ['id', 'customer', 'rating', 'review_text', 'created_at', 'updated_at']
         read_only_fields = ['id', 'customer', 'created_at', 'updated_at']
 
 

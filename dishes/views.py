@@ -259,28 +259,17 @@ class ReviewListCreateView(generics.ListCreateAPIView):
     pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
-        dish_id = self.kwargs['dish_id']
-        return DishReview.objects.filter(dish_id=dish_id).select_related('customer').order_by('-created_at')
+        chef_id = self.kwargs['chef_id']
+        return DishReview.objects.filter(dish__chef_id=chef_id).select_related('customer').order_by('-created_at')
 
 
     def perform_create(self, serializer):
-        dish_id = self.kwargs['dish_id']
-        dish = get_object_or_404(Dish, id=dish_id)
-
+        chef_id = self.kwargs['chef_id']
+        dish = Dish.objects.filter(chef_id=chef_id).first()
+        print(dish)
         user_type = self.request.user.get_user_type()
         if user_type != 'consumer':
             raise permissions.PermissionDenied("Only customers can submit reviews")
-
-        existing_review = DishReview.objects.filter(
-            dish=dish,
-            customer=self.request.user
-        ).first()
-
-        if existing_review:
-            raise permissions.PermissionDenied("You have already reviewed this dish")
-
-        # ✅ Save review first
-        review = serializer.save(dish=dish, customer=self.request.user)
 
         # ✅ Get the chef
         chef = dish.chef
@@ -296,7 +285,7 @@ class ReviewListCreateView(generics.ListCreateAPIView):
         # ✅ Update chef
         chef.rating = stats['avg_rating'] or 0
         chef.total_reviews = stats['total_reviews']
-        chef.save(update_fields=['rating', 'total_reviews'])
+        # chef.save(update_fields=['rating', 'total_reviews'])
 
         # Check if the user has already reviewed this dish
         existing_review = DishReview.objects.filter(

@@ -19,7 +19,7 @@ urlpatterns = [
     path('chef/<int:pk>/', views.ChefDishDetailView.as_view(), name='chef-dish-detail'),
 
     # Review endpoints
-    path('<int:dish_id>/reviews/', views.ReviewListCreateView.as_view(), name='dish-reviews'),
+    path('<int:chef_id>/reviews/', views.ReviewListCreateView.as_view(), name='dish-reviews'),
 
     # Variety endpoints
     path('<int:dish_id>/varieties/', views.DishVarietySectionListCreateView.as_view(), name='dish-varieties-list-create'),

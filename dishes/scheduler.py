@@ -4,8 +4,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 def refresh_job():
     try:
-        response = requests.get("https://homemadefood.onrender.com/api/dishes/refresh/")
-        response2 = requests.get("https://homemadefood.onrender.com/api/orders/cancel-expired/")
+        response = requests.get("http://homemadefood-production-5e66.up.railway.app/api/dishes/refresh/")
+        response2 = requests.get("http://homemadefood-production-5e66.up.railway.app/api/orders/cancel-expired/")
         print("Refresh status:", response.status_code)
         print("Cancel expired orders status:", response2.status_code)
     except Exception as e:
