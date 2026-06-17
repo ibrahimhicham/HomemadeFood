@@ -1,18 +1,33 @@
+import concurrent.futures
+import os
+
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
+PORT = os.environ.get('PORT', '8000')
+
+URLS = [
+    f"http://127.0.0.1:{PORT}/api/dishes/refresh/",
+    f"http://127.0.0.1:{PORT}/api/orders/cancel-expired/",
+]
+
+
+TIMEOUT = 10
+
+
 def refresh_job():
     try:
-        response = requests.get("http://homemadefood-production-5e66.up.railway.app/api/dishes/refresh/")
-        response2 = requests.get("http://homemadefood-production-5e66.up.railway.app/api/orders/cancel-expired/")
-        print("Refresh status:", response.status_code)
-        print("Cancel expired orders status:", response2.status_code)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as exe:
+            futures = [exe.submit(requests.get, url, timeout=TIMEOUT) for url in URLS]
+            for f in concurrent.futures.as_completed(futures):
+                resp = f.result()
+                print(f"Status {resp.url}: {resp.status_code}")
     except Exception as e:
         print("Error calling refresh:", e)
-    
+
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(refresh_job, 'interval', seconds=5)
+    scheduler.add_job(refresh_job, 'interval', seconds=5, max_instances=3)
     scheduler.start()
