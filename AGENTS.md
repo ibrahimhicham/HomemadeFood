@@ -1,37 +1,52 @@
-# Repository Guidelines
+# AGENTS.md — Homemade Food Platform
 
-## Project Structure & Module Organization
+## Project Structure
 
-`HomemadeFood/` contains the Django project configuration (`settings.py`, `asgi.py`, `urls.py`). Feature code lives in app directories:
+- `HomemadeFood/` — Django project config (`settings.py`, `asgi.py`, `urls.py`).
+- `authentication/` — Custom User model, login/signup, cards, profile, permissions.
+- `dishes/` — Dishes, categories, images, reviews, variety sections/options, pagination, APScheduler.
+  - Uses `dishes.apps.DishesConfig` in `INSTALLED_APPS`.
+- `orders/` — Orders, items, variety selections, notifications, WebSocket consumer/routing, services, middleware, management commands, constants, utils.
 
-- `authentication/`: custom user model, login/signup, cards, profile APIs
-- `dishes/`: dishes, categories, images, reviews, variety sections/options
-- `orders/`: order APIs, websocket consumer, routing, services, management commands
+## Setup & Developer Commands
 
-Tests currently live beside app code in `authentication/tests.py`, `dishes/tests.py`, and `orders/tests.py`. Project docs and API notes are stored at the repo root in files such as `README.md`, `ORDERS_GUIDE.md`, and `WEBSOCKETS.md`.
+```bash
+python -m venv .venv && source .venv/bin/activate   # Linux/macOS
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata initial_data_fixture.json   # test data (see TEST_CREDENTIALS.md)
+python manage.py load_initial_data                    # lighter 4-user fixture
+python manage.py runserver
+```
 
-## Build, Test, and Development Commands
+## Testing
 
-- `python -m venv .venv` then `.venv\Scripts\activate`: create and activate a local virtual environment on Windows
-- `pip install -r requirements.txt`: install Django, DRF, Channels, and supporting packages
-- `python manage.py migrate`: apply database migrations
-- `python manage.py runserver`: start the local API server
-- `python manage.py test`: run the full Django test suite
-- `python manage.py test orders`: run only the orders tests
-- `python manage.py test_order_websockets`: run the websocket routing smoke test
+```bash
+python manage.py test                                  # full suite
+python manage.py test authentication                   # only auth app
+python manage.py test dishes                           # only dishes app
+python manage.py test orders                           # only orders app
+python manage.py test_order_websockets                 # WebSocket routing smoke test
+```
 
-## Coding Style & Naming Conventions
+- WebSocket tests need `TransactionTestCase` (not `TestCase`) for `WebsocketCommunicator`.
+- Channel layer uses `InMemoryChannelLayer` in dev — no Redis needed.
+- Auth tests extend `APITestCase`; dishes tests use `TestCase`.
 
-Follow PEP 8 with 4-space indentation. Use `snake_case` for functions, variables, and module names; `PascalCase` for classes; and descriptive service names such as `OrderCreateService`. Keep business logic in service classes or serializers rather than views when possible. No formatter or linter is configured in this repository, so keep changes consistent with surrounding code.
+## Key Architecture
 
-## Testing Guidelines
+- **Auth**: DRF Token auth. WebSocket auth via `?token=` query param (`orders/middleware.py`).
+- **Orders**: Service classes (`OrderCreateService`, `OrderStatusService`, `CancelExpiredOrdersService`) in `orders/services.py`. Views call service `execute()`, not ORM directly.
+- **WebSocket**: Single endpoint `/ws/orders/`. Groups: `user_{user_id}` (personal), `order_{order_id}` (per-order). Broadcast via `orders/utils.py` (`send_to_user_group`, `send_to_order_group`).
+- **Order lookup** uses `order_id` (UUID), not PK `id`.
+- **APScheduler** in `dishes/scheduler.py` periodically pings refresh and cancel-expired endpoints (1-min interval).
+- **Media**: Cloudinary storage via `django-cloudinary-storage`. Cloudinary env vars loaded from `.env`.
+- **Email**: Console backend in dev (`django.core.mail.backends.console.EmailBackend`).
 
-Use Django’s test runner and `unittest`-style test cases. Add tests next to the app you change. Name test methods `test_<behavior>` and cover API permissions, serializer validation, and websocket routing where relevant. For realtime behavior, prefer `channels.testing.WebsocketCommunicator`.
+## Style & Conventions
 
-## Commit & Pull Request Guidelines
-
-Recent history uses short, informal messages like `editing on serializers and readme`. Keep commits concise, imperative, and scoped to one change, for example `add order status websocket test`. For pull requests, include a clear summary, affected endpoints or apps, migration notes if any, and example requests/responses when API behavior changes.
-
-## Security & Configuration Tips
-
-Do not commit secrets or real tokens. Authentication uses DRF token auth, and the websocket endpoint expects `?token=...`. Development uses SQLite and an in-memory channel layer; production should use environment-backed settings and Redis for Channels.
+- PEP 8, 4-space indent, `snake_case` functions/vars, `PascalCase` classes.
+- Business logic in service classes, not views.
+- No formatter/linter configured — keep consistent with surrounding code.
+- Commits: short imperative messages, e.g. `add order status websocket test`.

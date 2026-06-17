@@ -14,5 +14,5 @@ def refresh_job():
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(refresh_job, 'interval', minutes=1)
+    scheduler.add_job(refresh_job, 'interval', seconds=5)
     scheduler.start()
