@@ -8,8 +8,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 PORT = os.environ.get('PORT', '8000')
 
 URLS = [
-    f"http://127.0.0.1:{PORT}/api/dishes/refresh/",
-    f"http://127.0.0.1:{PORT}/api/orders/cancel-expired/",
+    f"https://homemade-food-msvc.vercel.app/api/dishes/refresh/",
+    f"https://homemade-food-msvc.vercel.app/api/orders/cancel-expired/",
 ]
 
 
@@ -29,5 +29,5 @@ def refresh_job():
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(refresh_job, 'interval', seconds=5, max_instances=3)
+    scheduler.add_job(refresh_job, 'interval', seconds=5, max_instances=1)
     scheduler.start()
